@@ -1,0 +1,1 @@
+# noop_vacation_manager
