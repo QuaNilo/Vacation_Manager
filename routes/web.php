@@ -11,14 +11,13 @@ Route::get('/admin/terms-of-service', [\App\Http\Controllers\DashboardController
 
 Route::get('theme-switcher/{activeTheme}', [\App\Http\Controllers\ThemeController::class, 'switch'])->name('theme-switcher');
 Route::get('layout-switcher/{activeLayout}', [\App\Http\Controllers\LayoutController::class, 'switch'])->name('layout-switcher');
-
+Route::get('calendar', [\App\Http\Controllers\Calendar::class, 'index'])->name('calendar.index');
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->prefix('admin')->group(function () {
     Route::get('/', [\App\Http\Controllers\DashboardController::class,'index'])->name('dashboard');
-
 
     Route::patch('/user/profile', [App\Http\Controllers\UserController::class, 'updateMe'])->name('users.update_me');
     Route::resource('users', App\Http\Controllers\UserController::class);

@@ -18,14 +18,14 @@ class SideMenu
                 'route_name' => 'dashboard',
                 'params' => [],
             ],
-            'demos.*' => [
-                'icon' => 'files',
-                'route_name' => 'demos.index',
-                'params' => [],
-                'title' => __('Demos'),
-                //'permissions' => Permission::PERMISSION_ADMIN_FULL_APP,
-                'visible' => auth()->user()->can(Permission::PERMISSION_ADMIN_FULL_APP),
-            ],
+//            'demos.*' => [
+//                'icon' => 'files',
+//                'route_name' => 'demos.index',
+//                'params' => [],
+//                'title' => __('Demos'),
+//                //'permissions' => Permission::PERMISSION_ADMIN_FULL_APP,
+//                'visible' => auth()->user()->can(Permission::PERMISSION_ADMIN_FULL_APP),
+//            ],
             'divider',
             'profile.show' => [
                 'icon' => 'user',

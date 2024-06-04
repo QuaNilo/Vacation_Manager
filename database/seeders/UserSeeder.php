@@ -32,6 +32,14 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('laravelstarter_tiago_0'),
                 'created_at' => date("Y-m-d H:i:s"),
                 'updated_at' => date("Y-m-d H:i:s")
+            ],
+            [
+                'name' => 'João',
+                'email' => 'joao.velez@noop.pt',
+                'email_verified_at' => date("Y-m-d H:i:s"),
+                'password' => Hash::make('mudame123*'),
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s")
             ]
         ]);
         $users = User::all();
