@@ -1,0 +1,52 @@
+/* Template Name: Techwind - Tailwind CSS Multipurpose Landing & Admin Dashboard Template
+   Author: Shreethemes
+   Email: support@shreethemes.in
+   Website: https://shreethemes.in
+   Version: 2.2.0
+   Created: May 2022
+   File: Main Css File
+*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// FONTS
+@import "custom/fonts";
+
+// general
+@import "custom/general";
+
+// structure
+@import "custom/structure/topnav";
+@import "custom/structure/footer";
+
+// pages
+@import "custom/pages/helper";
+@import "custom/pages/hero";
+@import "custom/pages/countdown";
+@import "custom/pages/portfolio";
+@import "custom/pages/contact";
+
+// Plugins
+@import "custom/plugins/swiper-slider";
+@import "custom/plugins/testi";
+@import "custom/plugins/choices";
+@import "custom/plugins/datepicker";
+
+/* Custom */
+@import '@iconscout/unicons/css/line.css';
+
+// @import "../../css/components/_tom-select.css";
+@import "tom-select/dist/css/tom-select.min.css";
+
+@import "custom/plugins/toastify";
+
+[x-cloak] {
+    display: none;
+}
+
+@layer base {
+    p {
+        @apply pb-3; /* This applies padding-bottom with the value of 4 */
+    }
+}

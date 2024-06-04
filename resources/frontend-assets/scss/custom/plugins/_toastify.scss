@@ -1,0 +1,36 @@
+@import "toastify-js/src/toastify.css";
+
+.toastify {
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    color: #334155;
+    max-width: calc(100% - 30px)
+}
+
+@media (min-width: 768px) {
+    .toastify {
+        max-width:none
+    }
+}
+
+.toastify .toast-close {
+    color: transparent;
+    position: absolute;
+    opacity: 1;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    padding-right: .75rem;
+    display: flex;
+    align-items: center
+}
+
+.toastify .toast-close:before {
+    content: "×";
+    display: block;
+    color: #64748b;
+    font-size: 1.875rem;
+    margin-top: -.375rem;
+    font-weight: 300
+}

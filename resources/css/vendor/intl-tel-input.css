@@ -1,0 +1,5 @@
+@import "intl-tel-input/build/css/intlTelInput.css";
+/* fix phone input label to be full width*/
+.iti {
+    width: 100% !important;
+}
