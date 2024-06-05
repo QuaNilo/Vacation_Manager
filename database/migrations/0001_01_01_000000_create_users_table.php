@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('team_id')->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -22,7 +21,7 @@ return new class extends Migration
             $table->integer('vacations_allowed')->default(1)->comment('0 - Não pode tirar ferias,
             1 - Pode tirar ferias.
             CALCULAR SE JÁ PASSOU 6 MESES DE CONTRATO para atribuir este valor apartir do campo "contract_start_date"');
-            $table->date('contract_start_date');
+            $table->date('contract_start_date')->default(fake()->date('Y-m-d'));
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();

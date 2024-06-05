@@ -73,9 +73,16 @@ class Company extends Model implements Auditable
         return isset($attributeLabels[$attribute]) ? $attributeLabels[$attribute] : __($attribute);
     }
 
-        public function teams(): \Illuminate\Database\Eloquent\Relations\HasMany
+    // Many-to-Many relationship with User
+    public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->hasMany(\App\Models\Team::class, 'company_id');
+        return $this->belongsToMany(User::class);
+    }
+
+    // One-to-Many relationship with Team
+    public function teams(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Team::class);
     }
 
 

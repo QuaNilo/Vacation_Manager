@@ -107,9 +107,16 @@ class Team extends Model implements Auditable
         return $this->hasMany(\App\Models\UserTeamRequests::class, 'team_id');
     }
 
+    // Many-to-Many relationship with User
+    public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    // Belongs to a Company
     public function company(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(\App\Models\Company::class, 'company_id');
+        return $this->belongsTo(Company::class);
     }
 
 }

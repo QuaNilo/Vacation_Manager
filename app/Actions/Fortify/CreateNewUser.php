@@ -35,7 +35,7 @@ class CreateNewUser implements CreatesNewUsers
         ]);
 
         //assign default role User
-        $user->assignRole(Role::ROLE_USER);
+        $user->assignRole(Role::ROLE_MANAGER);
         return $user;
     }
 }
