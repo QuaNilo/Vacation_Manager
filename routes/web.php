@@ -12,17 +12,29 @@ Route::get('/admin/terms-of-service', [\App\Http\Controllers\DashboardController
 Route::get('theme-switcher/{activeTheme}', [\App\Http\Controllers\ThemeController::class, 'switch'])->name('theme-switcher');
 Route::get('layout-switcher/{activeLayout}', [\App\Http\Controllers\LayoutController::class, 'switch'])->name('layout-switcher');
 Route::get('calendar', [\App\Http\Controllers\Calendar::class, 'index'])->name('calendar.index');
+Route::get('profile/password', [\App\Http\Controllers\ProfileController::class, 'passwordShow'])->name('site.password-show');
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+    'manager.access'
+])->prefix('admin')->group(function () {
+    Route::resource('companies', App\Http\Controllers\CompanyController::class);
+});
+
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
     'manager.access',
+    'check.company'
 ])->prefix('admin')->group(function () {
     Route::get('/', [\App\Http\Controllers\DashboardController::class,'index'])->name('dashboard');
 
     Route::patch('/user/profile', [App\Http\Controllers\UserController::class, 'updateMe'])->name('users.update_me');
     Route::resource('users', App\Http\Controllers\UserController::class);
-    Route::resource('companies', App\Http\Controllers\CompanyController::class);
     Route::resource('teams', App\Http\Controllers\TeamController::class);
     Route::resource('user-team-requests', App\Http\Controllers\UserTeamRequestsController::class);
     Route::resource('vacations', App\Http\Controllers\VacationController::class);

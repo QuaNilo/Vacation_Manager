@@ -2,137 +2,13 @@
     @section('breadcrumbs')
         {{ Breadcrumbs::render('home') }}
     @endsection
-    <div class="grid grid-cols-12 gap-6">
-        <div class="col-span-12 2xl:col-span-3">
-            <div class="-mb-10 pb-10 2xl:border-l">
-                <div class="grid grid-cols-12 gap-x-6 gap-y-6 2xl:gap-x-0 2xl:pl-6">
-
-                    <!-- BEGIN: Important Notes -->
-                    <div
-                        class="col-span-12 mt-3 md:col-span-6 xl:col-span-12 xl:col-start-1 xl:row-start-1 2xl:col-start-auto 2xl:row-start-auto">
-                        <div class="intro-x flex h-10 items-center">
-                            <h2 class="mr-auto truncate text-lg font-medium">
-                                Notas importantes
-                            </h2>
-                            <x-base.button
-                                class="tiny-slider-navigator mr-2 border-slate-300 px-2 text-slate-600 dark:text-slate-300"
-                                data-carousel="important-notes"
-                                data-target="prev"
-                            >
-                                <x-base.lucide
-                                    class="h-4 w-4"
-                                    icon="ChevronLeft"
-                                />
-                            </x-base.button>
-                            <x-base.button
-                                class="tiny-slider-navigator mr-2 border-slate-300 px-2 text-slate-600 dark:text-slate-300"
-                                data-carousel="important-notes"
-                                data-target="next"
-                            >
-                                <x-base.lucide
-                                    class="h-4 w-4"
-                                    icon="ChevronRight"
-                                />
-                            </x-base.button>
-                        </div>
-                        <div class="intro-x mt-5">
-                            <div class="box zoom-in">
-                                <x-base.tiny-slider id="important-notes">
-                                    <div class="p-5">
-                                        <div class="truncate text-base font-medium">
-                                            Lorem Ipsum is simply dummy text
-                                        </div>
-                                        <div class="mt-1 text-slate-400">20 Hours ago</div>
-                                        <div class="mt-1 text-justify text-slate-500">
-                                            Lorem Ipsum is simply dummy text of the printing and
-                                            typesetting industry. Lorem Ipsum has been the industry's
-                                            standard dummy text ever since the 1500s.
-                                        </div>
-                                        <div class="mt-5 flex font-medium">
-                                            <x-base.button
-                                                class="px-2 py-1"
-                                                type="button"
-                                                variant="secondary"
-                                            >
-                                                View Notes
-                                            </x-base.button>
-                                            <x-base.button
-                                                class="ml-auto px-2 py-1"
-                                                type="button"
-                                                variant="outline-secondary"
-                                            >
-                                                Dismiss
-                                            </x-base.button>
-                                        </div>
-                                    </div>
-                                    <div class="p-5">
-                                        <div class="truncate text-base font-medium">
-                                            Lorem Ipsum is simply dummy text
-                                        </div>
-                                        <div class="mt-1 text-slate-400">20 Hours ago</div>
-                                        <div class="mt-1 text-justify text-slate-500">
-                                            Lorem Ipsum is simply dummy text of the printing and
-                                            typesetting industry. Lorem Ipsum has been the industry's
-                                            standard dummy text ever since the 1500s.
-                                        </div>
-                                        <div class="mt-5 flex font-medium">
-                                            <x-base.button
-                                                class="px-2 py-1"
-                                                type="button"
-                                                variant="secondary"
-                                            >
-                                                View Notes
-                                            </x-base.button>
-                                            <x-base.button
-                                                class="ml-auto px-2 py-1"
-                                                type="button"
-                                                variant="outline-secondary"
-                                            >
-                                                Dismiss
-                                            </x-base.button>
-                                        </div>
-                                    </div>
-                                    <div class="p-5">
-                                        <div class="truncate text-base font-medium">
-                                            Lorem Ipsum is simply dummy text
-                                        </div>
-                                        <div class="mt-1 text-slate-400">20 Hours ago</div>
-                                        <div class="mt-1 text-justify text-slate-500">
-                                            Lorem Ipsum is simply dummy text of the printing and
-                                            typesetting industry. Lorem Ipsum has been the industry's
-                                            standard dummy text ever since the 1500s.
-                                        </div>
-                                        <div class="mt-5 flex font-medium">
-                                            <x-base.button
-                                                class="px-2 py-1"
-                                                type="button"
-                                                variant="secondary"
-                                            >
-                                                View Notes
-                                            </x-base.button>
-                                            <x-base.button
-                                                class="ml-auto px-2 py-1"
-                                                type="button"
-                                                variant="outline-secondary"
-                                            >
-                                                Dismiss
-                                            </x-base.button>
-                                        </div>
-                                    </div>
-                                </x-base.tiny-slider>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END: Important Notes -->
-                </div>
-            </div>
-        </div>
+    <div class="grid grid-cols-8 gap-6">
         <div class="col-span-12 2xl:col-span-9">
             <div class="grid grid-cols-12 gap-6">
                 <!-- BEGIN: General Report -->
                 <div class="col-span-12 mt-8">
                     <div class="intro-y flex h-10 items-center">
-                        <h2 class="mr-5 truncate text-lg font-medium">Dados gerais</h2>
+                        <h2 class="mr-5 truncate text-lg font-medium">{{__('Dados Gerais')}}</h2>
                         <a
                             class="ml-auto flex items-center text-primary"
                             href=""
@@ -140,7 +16,7 @@
                             <x-base.lucide
                                 class="mr-3 h-4 w-4"
                                 icon="RefreshCcw"
-                            /> Atualizar dados
+                            />{{__('Atualizar dados')}}
                         </a>
                     </div>
                     <div class="mt-5 grid grid-cols-12 gap-6">

@@ -13,7 +13,7 @@
             <img
                 class="w-6"
                 src="{{ asset('images/logo-icon-dark.svg') }}"
-                alt="{{ config('app.name') }}"
+                alt="{{ auth()->user()->companies()->first()->name ?? 'Vacation Manager' }}"
             />
         </a>
         <a

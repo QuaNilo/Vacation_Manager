@@ -25,7 +25,7 @@ class CreateUserRequest extends FormRequest
     public function rules()
     {
         $rules = User::rules();
-        $rules['password'][0] = 'required'; // change from nullable to required
+        $rules['password'][0] = 'nullable'; // change from nullable to required
         return $rules;
     }
 }

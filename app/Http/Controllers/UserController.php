@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\MagicLinkManager\MagicLinkManager;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateMeRequest;
 use App\Http\Requests\UpdateUserRequest;
 //use App\Http\Controllers\AppBaseController;
+use App\Mail\MagicLinkEmail;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
@@ -13,6 +15,7 @@ use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -31,9 +34,9 @@ class UserController extends Controller
     {
         $user = new User();
         $user->loadDefaultValues();
-        if(auth()->user()->can(Permission::PERMISSION_ADMIN_FULL_APP)) {
+        if(auth()->user()->can(Permission::PERMISSION_MANAGE_APP)) {
             $roles = Role::pluck('name', 'id');
-        }else{
+        }else{-
             $roles = Role::where('name', '!=', Role::ROLE_SUPER_ADMIN)->pluck('name', 'id');
         }
         return view('users.create', compact('user', 'roles'));
@@ -44,10 +47,11 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        $input = $request->except('roles', 'permissions', 'password_confirmation');
-        $input['password'] = Hash::make($input['password']);
+        $input = $request->except('permissions', 'password_confirmation');
+        if(isset($input['password'])){
+            $input['password'] = Hash::make($input['password']);
+        }
         $input['email_verified_at'] = Carbon::now();
-
         /** @var User $user */
         $user = User::create($input);
         if($user){
@@ -59,6 +63,10 @@ class UserController extends Controller
             if($user->roles()->count() == 0){
                 $user->assignRole(Role::ROLE_USER);
             }
+            $user->companies()->attach(auth()->user()->companies()->first()->id);
+            $url_magicLink = MagicLinkManager::generateMagicLink($user);
+            Mail::to($user->email)->send(new MagicLinkEmail($user, $url_magicLink));
+
             event(new Registered($user));
             flash(__('Saved successfully.'))->overlay()->success();
         }else{

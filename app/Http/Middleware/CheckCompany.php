@@ -19,11 +19,10 @@ class CheckCompany
 
         // Get the currently authenticated user
         $user = Auth::user();
-
         // Check if the user has a company relationship
-        if ($user && !$user->company) {
+        if ($user && !$user->companies()->first()) {
             // Redirect to the company creation route
-            return redirect()->route('company.create');
+            return redirect()->route('companies.create');
         }
         return $next($request);
     }

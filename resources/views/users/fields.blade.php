@@ -207,7 +207,7 @@
                     <x-base.tom-select
                         class="w-full {{ ($errors->has('roles') ? 'border-danger' : '') }}"
                         id="roles"
-                        name="roles[]"
+                        name="roles"
                         data-remove-button="true"
                         data-placeholder="{{ __('Select the roles') }}"
                         :value="old('roles', $user->roles ?? '')"
@@ -215,7 +215,7 @@
                     >
                         <option ></option>
                         @foreach($roles as $key => $label)
-                            <option value="{{ $key }}" {{ in_array($key, old('roles', $user->roles->pluck('id')->toArray() ?? [])) ? 'selected' : '' }}>{{ $label }}</option>
+                            <option value="{{ $key }}">{{ $label }}</option>
                         @endforeach
                     </x-base.tom-select>
                     @error('roles')

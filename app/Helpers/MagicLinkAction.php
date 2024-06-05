@@ -1,5 +1,5 @@
 <?php
-/*
+
 namespace App\Helpers;
 
 use MagicLink\Actions\ActionAbstract;
@@ -14,11 +14,6 @@ class MagicLinkAction extends ResponseAction
 
     protected $guard;
 
-    /**
-     * Constructor to action.
-     *
-     * @param  mixed  $httpResponse
-     *//*
     public function __construct(Authenticatable $user, $httpResponse = null, ?string $guard = null)
     {
         $this->authIdentifier = $user->getAuthIdentifier();
@@ -35,9 +30,6 @@ class MagicLinkAction extends ResponseAction
         return $this;
     }
 
-    /**
-     * Execute Action.
-     *//*
     public function run()
     {
         Auth::guard($this->guard)->loginUsingId($this->authIdentifier);
@@ -52,4 +44,4 @@ class MagicLinkAction extends ResponseAction
 
         return parent::run();
     }
-}*/
+}

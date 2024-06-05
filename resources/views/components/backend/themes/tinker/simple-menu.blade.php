@@ -14,7 +14,7 @@
                 <img
                     class="w-6"
                     src="{{ asset('images/logo-icon-dark.svg') }}"
-                    alt="{{ config('app.name') }}"
+                    alt="{{ auth()->user()->companies()->first()->name ?? 'Vacation Manager' }}"
                 />
             </a>
             <div class="side-nav__divider my-6"></div>

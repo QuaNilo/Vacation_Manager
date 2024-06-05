@@ -10,9 +10,9 @@
             <img
                 class="w-6"
                 src="{{ asset('images/logo-icon-dark.svg') }}"
-                alt="{{ config('app.name') }}"
+                alt="{{ auth()->user()->companies()->first()->name ?? 'Vacation Manager' }}"
             />
-            <span class="ml-3 text-lg text-white"> {{ config('app.name') }} </span>
+            <span class="ml-3 text-lg text-white"> {{ auth()->user()->companies()->first()->name ?? 'Vacation Manager' }} </span>
         </a>
         <!-- END: Logo -->
         @section('breadcrumbs')

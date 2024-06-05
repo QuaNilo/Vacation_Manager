@@ -159,6 +159,25 @@ Breadcrumbs::for('vacations.edit', function (BreadcrumbTrail $trail, $model) {
 });
 
 
+// Home > Company
+//Breadcrumbs::for('companies.index', function (BreadcrumbTrail $trail) {
+//    $trail->parent('home');
+//    $trail->push(__('Company'), route('companies.index'));
+//});
+Breadcrumbs::for('companies.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push(__('Create'), route('companies.create'));
+});
+Breadcrumbs::for('companies.show', function (BreadcrumbTrail $trail, $model) {
+    $trail->parent('companies.index');
+    $trail->push($model->name, route('companies.show', $model));
+});
+Breadcrumbs::for('companies.edit', function (BreadcrumbTrail $trail, $model) {
+    $trail->parent('companies.show', $model);
+    $trail->push(__('Update'), route('companies.edit', $model));
+});
+
+
 /*
 // Home > Blog
 Breadcrumbs::for('blog', function (BreadcrumbTrail $trail) {

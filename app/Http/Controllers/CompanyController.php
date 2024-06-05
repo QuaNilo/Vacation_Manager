@@ -37,13 +37,14 @@ class CompanyController extends Controller
 
         /** @var Company $company */
         $company = Company::create($input);
+        auth()->user()->companies()->attach($company->id);
         if($company){
             flash(__('Saved successfully.'))->overlay()->success();
         }else{
             flash(__('Ups something went wrong'))->overlay()->danger();
         }
 
-        return redirect(route('companies.index'));
+        return redirect(route('dashboard'));
     }
 
     /**

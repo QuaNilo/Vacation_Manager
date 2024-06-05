@@ -14,7 +14,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'recaptcha' => \App\Http\Middleware\ValidateRecaptcha::class,
-            'manager.access' => \App\Http\Middleware\ManagerAccess::class
+            'manager.access' => \App\Http\Middleware\ManagerAccess::class,
+            'check.company' => \App\Http\Middleware\CheckCompany::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
