@@ -68,6 +68,34 @@
 
                 </x-base.tab>
             @endif
+            @if(!empty($user->id))
+                <x-base.tab
+                    id="team-tab"
+                    :fullWidth="false"
+                >
+                    <x-base.tab.button
+                        @class([
+                            'flex items-center justify-center w-full px-0 py-0 sm:w-40 text-slate-500',
+                            '[&:not(.active)]:hover:border-transparent [&:not(.active)]:hover:bg-transparent [&:not(.active)]:hover:text-slate-600 [&:not(.active)]:hover:dark:bg-transparent [&:not(.active)]:hover:dark:text-slate-300',
+                            '[&.active]:text-primary [&.active]:border-transparent [&.active]:dark:bg-darkmode-600 [&.active]:dark:border-x-transparent [&.active]:dark:border-t-transparent [&.active]:dark:text-white',
+                        ])
+                        as="button"
+                        type="button"
+                    >
+                        <x-base.tippy
+                            class="flex w-full items-center justify-center py-4"
+                            aria-selected="false"
+                            content="{{ __('Manage Team') }}"
+                        >
+                            <x-base.lucide
+                                class="mr-2 h-4 w-4"
+                                icon="users-round"
+                            /> {{ __('Team') }}
+                        </x-base.tippy>
+                    </x-base.tab.button>
+
+                </x-base.tab>
+            @endif
             @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
                 <x-base.tab
                     id="two-factor-authentication-tab"
@@ -164,6 +192,14 @@
                     id="password"
                 >
                     @include('users._password_tab')
+                </x-base.tab.panel>
+            @endif
+            @if(!empty($user->id))
+                <x-base.tab.panel
+                    class="p-5"
+                    id="team"
+                >
+                    @include('users.manage-team')
                 </x-base.tab.panel>
             @endif
             @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())

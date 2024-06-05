@@ -91,6 +91,8 @@
                         @livewire('profile.delete-user-form')
                     </div>
                 @endif
+
+                @dd(request())
             </div>
         </div>
 

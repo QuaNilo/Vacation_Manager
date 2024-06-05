@@ -272,11 +272,6 @@ class User extends Authenticatable implements MustVerifyEmail, Auditable
         return $this->hasMany(\App\Models\Demo::class, 'user_id');
     }
 
-    public function userTeamRequests(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(\App\Models\UserTeamRequests::class, 'user_id');
-    }
-
     public function company(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Company::class);
