@@ -34,7 +34,6 @@ class VacationController extends Controller
     public function store(CreateVacationRequest $request)
     {
         $input = $request->all();
-
         /** @var Vacation $vacation */
         $vacation = Vacation::create($input);
         if($vacation){

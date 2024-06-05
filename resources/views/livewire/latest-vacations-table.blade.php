@@ -100,7 +100,7 @@
                             <div class="flex items-center justify-center">
                                 <a
                                     class="mr-3 flex items-center"
-                                    href=""
+                                    href="{{route('vacations.edit', $vacation)}}"
                                 >
                                     <x-base.lucide
                                         class="mr-1 h-4 w-4"
@@ -110,7 +110,7 @@
                                 </a>
                                 <a
                                     class="flex items-center text-danger"
-                                    href=""
+                                    href="{{route('vacations.destroy', $vacation)}}"
                                 >
                                     <x-base.lucide
                                         class="mr-1 h-4 w-4"

@@ -37,6 +37,8 @@ class TeamController extends Controller
 
         /** @var Team $team */
         $team = Team::create($input);
+        $team->company()->associate(auth()->user()->company()->first());
+        $team->save();
         if($team){
             flash(__('Saved successfully.'))->overlay()->success();
         }else{

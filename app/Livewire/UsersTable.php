@@ -32,11 +32,11 @@ class UsersTable extends Component implements HasForms, HasTable
     public function table(Table $table): Table
     {
         $newModel = new User();
-        $authenticatedUserCompany = auth()->user()->companies()->first();
+        $authenticatedUserCompany = auth()->user()->company()->first();
         if ($authenticatedUserCompany) {
             // Build the query to fetch users with the same company
-            $query = User::query()->with('roles', 'companies')
-                ->whereHas('companies', function ($query) use ($authenticatedUserCompany) {
+            $query = User::query()->with('roles', 'company')
+                ->whereHas('company', function ($query) use ($authenticatedUserCompany) {
                     $query->where('companies.id', $authenticatedUserCompany->id); // Specify the table name or alias
                 });
         }

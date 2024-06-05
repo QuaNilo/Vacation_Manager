@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('category')->nullable();
-            $table->foreignId('company_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('company_id')->nullable()->constrained()->cascadeOnDelete();
             $table->integer('members_max_vacation_days')->default(7);
             $table->integer('members_max_on_vacation')->default(1);
             $table->integer('members_vacation_days_regen_monthly')->default(2);

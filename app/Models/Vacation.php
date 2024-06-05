@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\LoadDefaults;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -46,6 +47,21 @@ class Vacation extends Model implements Auditable
 
     public $table = 'vacations';
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($vacation) {
+            // Calculate the difference in days between vacation_start and vacation_end
+            $start = Carbon::parse($vacation->vacation_start);
+            $end = Carbon::parse($vacation->vacation_end);
+            $durationInDays = abs($end->diffInDays($start));
+
+            // Set the duration_in_days attribute in the model
+            $vacation->vacation_days = $durationInDays;
+        });
+    }
+
     public $fillable = [
         'user_id',
         'approved',
@@ -69,7 +85,7 @@ class Vacation extends Model implements Auditable
         'approved' => 'required',
         'vacation_start' => 'required',
         'vacation_end' => 'required',
-        'vacation_days' => 'required',
+        'vacation_days' => 'nullable',
         'created_at' => 'nullable',
         'updated_at' => 'nullable'
         ];

@@ -1,30 +1,51 @@
+<?php
+    $company = auth()->user()->company()->first();
+    $users = $company->users()->get()
+?>
+
 <!-- User Id Field -->
+{{--<div class="mb-3">--}}
+{{--    <x-base.form-label for="user_id">{{ $vacation->getAttributeLabel('user_id') }}</x-base.form-label>--}}
+{{--    <x-base.form-input--}}
+{{--        class="w-full {{ ($errors->has('user_id') ? 'border-danger' : '') }}"--}}
+{{--        id="user_id"--}}
+{{--        name="user_id"--}}
+{{--        :value="old('user_id', $vacation->user_id ?? '')"--}}
+{{--        type="number"--}}
+{{--        step="1"--}}
+{{--    />--}}
+{{--    @error('user_id')--}}
+{{--        <div class="mt-2 text-danger">{{ $message }}</div>--}}
+{{--    @enderror--}}
+{{--</div>--}}
+
 <div class="mb-3">
-    <x-base.form-label for="user_id">{{ $vacation->getAttributeLabel('user_id') }}</x-base.form-label>
-    <x-base.form-input
-        class="w-full {{ ($errors->has('user_id') ? 'border-danger' : '') }}"
-        id="user_id"
-        name="user_id"
-        :value="old('user_id', $vacation->user_id ?? '')"
-        type="number"
-        step="1"
-    />
+    <x-base.form-label for="user_id">{{ __('Utilizador') }}</x-base.form-label>
+    <select name="user_id" id="user_id" class="w-full {{ ($errors->has('user_id') ? 'border-danger' : '') }} disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80">
+            <option value="">{{__('Selecione um Utilizador')}}</option>
+        @foreach($users as $user)
+            <option value="{{ $user->id }}">{{ $user->name }}</option>
+        @endforeach
+    </select>
     @error('user_id')
         <div class="mt-2 text-danger">{{ $message }}</div>
     @enderror
 </div>
 
-<!-- Approved Field -->
 <div class="mb-3">
     <x-base.form-label for="approved">{{ $vacation->getAttributeLabel('approved') }}</x-base.form-label>
-    <x-base.form-input
+    <x-base.form-select
         class="w-full {{ ($errors->has('approved') ? 'border-danger' : '') }}"
         id="approved"
         name="approved"
-        :value="old('approved', $vacation->approved ?? '')"
-        type="number"
-        step="1"
-    />
+        :value="old('approved', $edition->approved ?? '')"
+        type="text"
+    >
+        <option >{{ __('Select an option') }}</option>
+        @foreach(\App\Models\Vacation::getApprovedArray() as $key => $label)
+        <option value="{{ $key }}" {{ old('approved', $edition->approved ?? '') == $key ? 'selected' : '' }}>{{ $label }}</option>
+        @endforeach
+    </x-base.form-select>
     @error('approved')
         <div class="mt-2 text-danger">{{ $message }}</div>
     @enderror
@@ -100,22 +121,6 @@
         </x-base.input-group.text>
     </x-base.input-group>
     @error('vacation_end')
-        <div class="mt-2 text-danger">{{ $message }}</div>
-    @enderror
-</div>
-
-<!-- Vacation Days Field -->
-<div class="mb-3">
-    <x-base.form-label for="vacation_days">{{ $vacation->getAttributeLabel('vacation_days') }}</x-base.form-label>
-    <x-base.form-input
-        class="w-full {{ ($errors->has('vacation_days') ? 'border-danger' : '') }}"
-        id="vacation_days"
-        name="vacation_days"
-        :value="old('vacation_days', $vacation->vacation_days ?? '')"
-        type="number"
-        step="1"
-    />
-    @error('vacation_days')
         <div class="mt-2 text-danger">{{ $message }}</div>
     @enderror
 </div>

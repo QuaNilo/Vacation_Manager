@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateMeRequest;
 use App\Http\Requests\UpdateUserRequest;
 //use App\Http\Controllers\AppBaseController;
 use App\Mail\MagicLinkEmail;
+use App\Models\Company;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
@@ -52,10 +53,11 @@ class UserController extends Controller
         if(isset($input['password'])){
             $input['password'] = Hash::make($input['password']);
         }
-        $input['company_id'] = auth()->user()->companies()->first()->id;
         $input['email_verified_at'] = Carbon::now();
         /** @var User $user */
         $user = User::create($input);
+        $user->company()->associate(Company::where('id', auth()->user()->company()->first()->id)->first());
+        $user->save();
         if($user){
             if(auth()->user()->can(Permission::PERMISSION_ADMIN_APP) && url()->previous() != route('profile.show')) {
                 // Handle the user roles

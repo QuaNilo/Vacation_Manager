@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [\App\Http\Controllers\SiteController::class, 'index'])->name('home');
-
+Route::get('/warning/{message}', [\App\Http\Controllers\WarningHelper::class, 'display_warning_back'])->name('display_warning');
+Route::get('/warning/{message}', [\App\Http\Controllers\WarningHelper::class, 'display_warning'])->name('display_warning');
 
 Route::get('/admin/cookies-policy', [\App\Http\Controllers\DashboardController::class,'cookiesPolicy'])->name('dashboard.cookies_policy');
 Route::get('/admin/privacy-policy', [\App\Http\Controllers\DashboardController::class,'privacyPolicy'])->name('dashboard.privacy_policy');

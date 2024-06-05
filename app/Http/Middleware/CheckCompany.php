@@ -22,6 +22,7 @@ class CheckCompany
         // Check if the user has a company relationship
         if ($user && !$user->company()->first()) {
             // Redirect to the company creation route
+            flash('You need to associate with a company')->overlay()->warning()->duration(4000);
             return redirect()->route('companies.create');
         }
         return $next($request);

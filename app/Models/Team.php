@@ -80,12 +80,12 @@ class Team extends Model implements Auditable
     public static function attributeLabels() : array
     {
         return [
-            'id' => __('Id'),
+            'id' => __('ID'),
         'name' => __('Name'),
         'category' => __('Category'),
-        'members_max_vacation_days' => __('Members Max Vacation Days'),
-        'members_max_on_vacation' => __('Members Max On Vacation'),
-        'members_vacation_days_regen_monthly' => __('Members Vacation Days Regen Monthly'),
+        'members_max_vacation_days' => __('Max Number Continuos Vacation Days'),
+        'members_max_on_vacation' => __('Max Number of Team Members on Vacation Simultaneously'),
+        'members_vacation_days_regen_monthly' => __('Vacation Days Gained Monthly'),
         'created_at' => __('Created At'),
         'updated_at' => __('Updated At')
         ];
