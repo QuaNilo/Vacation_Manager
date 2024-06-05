@@ -121,6 +121,44 @@ Breadcrumbs::for('demos.edit', function (BreadcrumbTrail $trail, $model) {
 });
 
 
+// Home > Team
+Breadcrumbs::for('teams.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push(__('Teams'), route('teams.index'));
+});
+Breadcrumbs::for('teams.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('teams.index');
+    $trail->push(__('Create'), route('teams.create'));
+});
+Breadcrumbs::for('teams.show', function (BreadcrumbTrail $trail, $model) {
+    $trail->parent('teams.index');
+    $trail->push($model->name, route('teams.show', $model));
+});
+Breadcrumbs::for('teams.edit', function (BreadcrumbTrail $trail, $model) {
+    $trail->parent('teams.show', $model);
+    $trail->push(__('Update'), route('teams.edit', $model));
+});
+
+
+// Home > Vacation
+Breadcrumbs::for('vacations.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push(__('Vacations'), route('vacations.index'));
+});
+Breadcrumbs::for('vacations.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('vacations.index');
+    $trail->push(__('Create'), route('vacations.create'));
+});
+Breadcrumbs::for('vacations.show', function (BreadcrumbTrail $trail, $model) {
+    $trail->parent('vacations.index');
+    $trail->push($model->user->name, route('vacations.show', $model));
+});
+Breadcrumbs::for('vacations.edit', function (BreadcrumbTrail $trail, $model) {
+    $trail->parent('vacations.show', $model);
+    $trail->push(__('Update'), route('vacations.edit', $model));
+});
+
+
 /*
 // Home > Blog
 Breadcrumbs::for('blog', function (BreadcrumbTrail $trail) {

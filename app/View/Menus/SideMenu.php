@@ -53,6 +53,46 @@ class SideMenu
                     ],
                 ]
             ],
+            'teams' => [
+                'icon' => 'teams',
+                'title' => __('Teams'),
+                'permissions' => Permission::PERMISSION_MANAGE_APP,
+                'sub_menu' => [
+                    'teams.index' => [
+                        'icon' => 'list',
+                        'route_name' => 'teams.index',
+                        'params' => [],
+                        'title' => __('List Teams')
+                    ],
+                    'teams.create' => [
+                        'icon' => 'plus-circle',
+                        'route_name' => 'teams.create',
+                        'params' => [],
+                        'title' => __('Create Teams'),
+
+                    ],
+                ]
+            ],
+            'vacations' => [
+                'icon' => 'vacations',
+                'title' => __('Vacations'),
+                'permissions' => Permission::PERMISSION_MANAGE_APP,
+                'sub_menu' => [
+                    'vacations.index' => [
+                        'icon' => 'list',
+                        'route_name' => 'vacations.index',
+                        'params' => [],
+                        'title' => __('List Vacations')
+                    ],
+                    'vacations.create' => [
+                        'icon' => 'plus-circle',
+                        'route_name' => 'vacations.create',
+                        'params' => [],
+                        'title' => __('Create Vacations'),
+
+                    ],
+                ]
+            ],
             'translations' => [
                 'icon' => 'globe',
                 'route_name' => 'translations.index',
