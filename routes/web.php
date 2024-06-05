@@ -21,6 +21,10 @@ Route::middleware([
 
     Route::patch('/user/profile', [App\Http\Controllers\UserController::class, 'updateMe'])->name('users.update_me');
     Route::resource('users', App\Http\Controllers\UserController::class);
+    Route::resource('companies', App\Http\Controllers\CompanyController::class);
+    Route::resource('teams', App\Http\Controllers\TeamController::class);
+    Route::resource('user-team-requests', App\Http\Controllers\UserTeamRequestsController::class);
+    Route::resource('vacations', App\Http\Controllers\VacationController::class);
 
     Route::impersonate();
 
@@ -31,3 +35,4 @@ Route::middleware([
     Route::get('/demos/{demo}/edit-livewire', [App\Http\Controllers\DemoController::class, 'editLivewire'])->name('demos.edit_livewire');
     Route::resource('demos', App\Http\Controllers\DemoController::class);
 });
+

@@ -12,49 +12,43 @@ use OwenIt\Auditing\Contracts\Auditable;
  *
  * @property int $id
  * @property int $user_id
+ * @property int $team_id
  * @property int $approved 0 - Not Approved, 1 - Approved, 2 - Pending
- * @property \Illuminate\Support\Carbon $vacation_start
- * @property \Illuminate\Support\Carbon $vacation_end
- * @property int $vacation_days
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \OwenIt\Auditing\Models\Audit> $audits
  * @property-read int|null $audits_count
+ * @property-read \App\Models\Team $team
  * @property-read \App\Models\User $user
- * @method static \Illuminate\Database\Eloquent\Builder|Vacation newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Vacation newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Vacation query()
- * @method static \Illuminate\Database\Eloquent\Builder|Vacation whereApproved($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Vacation whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Vacation whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Vacation whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Vacation whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Vacation whereVacationDays($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Vacation whereVacationEnd($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Vacation whereVacationStart($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserTeamRequests newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserTeamRequests newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserTeamRequests query()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserTeamRequests whereApproved($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserTeamRequests whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserTeamRequests whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserTeamRequests whereTeamId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserTeamRequests whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserTeamRequests whereUserId($value)
  * @mixin \Eloquent
  */
-class Vacation extends Model implements Auditable
+class UserTeamRequests extends Model implements Auditable
 {
     use LoadDefaults;
     use \OwenIt\Auditing\Auditable;
     use HasFactory;
 
-    public $table = 'vacations';
+    public $table = 'user_team_requests';
 
     public $fillable = [
         'user_id',
-        'approved',
-        'vacation_start',
-        'vacation_end',
-        'vacation_days'
+        'team_id',
+        'approved'
     ];
 
     protected function casts(): array
     {
         return [
-            'vacation_start' => 'date',
-        'vacation_end' => 'date'
+            
         ];
     }
 
@@ -62,10 +56,8 @@ class Vacation extends Model implements Auditable
     {
         return [
             'user_id' => 'required',
+        'team_id' => 'required',
         'approved' => 'required',
-        'vacation_start' => 'required',
-        'vacation_end' => 'required',
-        'vacation_days' => 'required',
         'created_at' => 'nullable',
         'updated_at' => 'nullable'
         ];
@@ -81,10 +73,8 @@ class Vacation extends Model implements Auditable
         return [
             'id' => __('Id'),
         'user_id' => __('User Id'),
+        'team_id' => __('Team Id'),
         'approved' => __('Approved'),
-        'vacation_start' => __('Vacation Start'),
-        'vacation_end' => __('Vacation End'),
-        'vacation_days' => __('Vacation Days'),
         'created_at' => __('Created At'),
         'updated_at' => __('Updated At')
         ];
@@ -99,6 +89,11 @@ class Vacation extends Model implements Auditable
     {
         $attributeLabels = static::attributeLabels();
         return isset($attributeLabels[$attribute]) ? $attributeLabels[$attribute] : __($attribute);
+    }
+
+    public function team(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(\App\Models\Team::class, 'team_id');
     }
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
