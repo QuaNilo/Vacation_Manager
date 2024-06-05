@@ -66,6 +66,26 @@ Breadcrumbs::for('roles.edit', function (BreadcrumbTrail $trail, $model) {
     $trail->push(__('Update'), route('roles.edit', $model));
 });
 
+// Home > Calendar
+Breadcrumbs::for('calendar.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push(__('Calendar'), route('calendar.index'));
+});
+//Breadcrumbs::for('roles.create', function (BreadcrumbTrail $trail) {
+//    $trail->parent('roles.index');
+//    $trail->push(__('Create'), route('roles.create'));
+//});
+//Breadcrumbs::for('roles.show', function (BreadcrumbTrail $trail, $model) {
+//    $trail->parent('roles.index');
+//    $trail->push($model->name, route('roles.show', $model));
+//});
+//Breadcrumbs::for('roles.edit', function (BreadcrumbTrail $trail, $model) {
+//    $trail->parent('roles.show', $model);
+//    $trail->push(__('Update'), route('roles.edit', $model));
+//});
+
+
+
 // Home > Settings
 Breadcrumbs::for('settings.index', function (BreadcrumbTrail $trail) {
     $trail->parent('home');

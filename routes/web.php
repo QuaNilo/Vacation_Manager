@@ -12,8 +12,8 @@ Route::get('/admin/terms-of-service', [\App\Http\Controllers\DashboardController
 
 Route::get('theme-switcher/{activeTheme}', [\App\Http\Controllers\ThemeController::class, 'switch'])->name('theme-switcher');
 Route::get('layout-switcher/{activeLayout}', [\App\Http\Controllers\LayoutController::class, 'switch'])->name('layout-switcher');
-Route::get('calendar', [\App\Http\Controllers\Calendar::class, 'index'])->name('calendar.index');
-Route::get('profile/password', [\App\Http\Controllers\ProfileController::class, 'passwordShow'])->name('site.password-show');
+Route::get('calendar', [\App\Http\Controllers\SiteCalendar::class, 'index'])->name('site.calendar');
+Route::get('profile/password', [\App\Http\Controllers\SiteProfileController::class, 'passwordShow'])->name('site.password-show');
 
 Route::middleware([
     'auth:sanctum',
@@ -39,6 +39,7 @@ Route::middleware([
     Route::resource('teams', App\Http\Controllers\TeamController::class);
     Route::resource('user-team-requests', App\Http\Controllers\UserTeamRequestsController::class);
     Route::resource('vacations', App\Http\Controllers\VacationController::class);
+    Route::get('/calendar', [App\Http\Controllers\CalendarController::class, 'index'])->name('calendar.index');
 
     Route::impersonate();
 

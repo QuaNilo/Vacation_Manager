@@ -18,6 +18,12 @@ class SideMenu
                 'route_name' => 'dashboard',
                 'params' => [],
             ],
+            'calendar' => [
+                'icon' => 'calendar',
+                'title' => __('Calendar'),
+                'route_name' => 'calendar.index',
+                'params' => [],
+            ],
 //            'demos.*' => [
 //                'icon' => 'files',
 //                'route_name' => 'demos.index',
