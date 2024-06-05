@@ -8,7 +8,7 @@ use OwenIt\Auditing\Contracts\Auditable;
  use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property int $user_id
@@ -39,6 +39,10 @@ class Vacation extends Model implements Auditable
     use LoadDefaults;
     use \OwenIt\Auditing\Auditable;
     use HasFactory;
+
+    const STATUS_APPROVED = 1;
+    const STATUS_REJECTED = 0;
+    const STATUS_PENDING = 2;
 
     public $table = 'vacations';
 
@@ -90,6 +94,22 @@ class Vacation extends Model implements Auditable
         ];
     }
 
+    public static function getApprovedArray() : array
+    {
+        return [
+            self::STATUS_PENDING =>  __('Pendente'),
+            self::STATUS_APPROVED =>  __('Aprovado'),
+            self::STATUS_REJECTED =>  __('Rejeitado'),
+        ];
+    }
+
+
+        public function getApprovedLabelAttribute() : string
+    {
+        $array = static::getApprovedArray();
+        return $array[$this->approved] ?? "";
+    }
+
     /**
     * Return the attribute label
     * @param string $attribute
@@ -103,7 +123,7 @@ class Vacation extends Model implements Auditable
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(\App\Models\User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
 
 

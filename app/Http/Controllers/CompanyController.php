@@ -31,21 +31,30 @@ class CompanyController extends Controller
     /**
      * Store a newly created Company in storage.
      */
-    public function store(CreateCompanyRequest $request)
-    {
+public function store(CreateCompanyRequest $request)
+{
+    try {
         $input = $request->all();
 
-        /** @var Company $company */
+        // Attempt to create the company
         $company = Company::create($input);
-        auth()->user()->companies()->attach($company->id);
-        if($company){
-            flash(__('Saved successfully.'))->overlay()->success();
-        }else{
-            flash(__('Ups something went wrong'))->overlay()->danger();
-        }
 
-        return redirect(route('dashboard'));
+        // Associate the company with the authenticated user
+        auth()->user()->company()->associate($company);
+        auth()->user()->save();
+
+        flash(__('Saved successfully.'))->overlay()->success();
+    } catch (QueryException $exception) {
+        // Check if the exception is due to a unique constraint violation
+        if ($exception->errorInfo[1] === 1062) { // 1062 is the error code for duplicate entry
+            flash(__('Error: Duplicate entry. Please provide unique values.'))->overlay()->error();
+        } else {
+            flash(__('An error occurred. Please try again later.'))->overlay()->error();
+        }
     }
+
+    return redirect(route('dashboard'));
+}
 
     /**
      * Display the specified Company.

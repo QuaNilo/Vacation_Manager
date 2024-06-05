@@ -47,10 +47,12 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
+
         $input = $request->except('permissions', 'password_confirmation');
         if(isset($input['password'])){
             $input['password'] = Hash::make($input['password']);
         }
+        $input['company_id'] = auth()->user()->companies()->first()->id;
         $input['email_verified_at'] = Carbon::now();
         /** @var User $user */
         $user = User::create($input);
@@ -63,7 +65,6 @@ class UserController extends Controller
             if($user->roles()->count() == 0){
                 $user->assignRole(Role::ROLE_USER);
             }
-            $user->companies()->attach(auth()->user()->companies()->first()->id);
             $url_magicLink = MagicLinkManager::generateMagicLink($user);
             Mail::to($user->email)->send(new MagicLinkEmail($user, $url_magicLink));
 

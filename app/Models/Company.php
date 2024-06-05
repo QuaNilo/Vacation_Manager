@@ -74,15 +74,20 @@ class Company extends Model implements Auditable
     }
 
     // Many-to-Many relationship with User
-    public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function users(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->hasMany(User::class);
     }
 
     // One-to-Many relationship with Team
     public function teams(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Team::class);
+    }
+
+    public function vacations(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
+    {
+        return $this->hasManyThrough(Vacation::class, User::class);
     }
 
 

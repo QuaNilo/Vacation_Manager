@@ -14,9 +14,9 @@
                 <img
                     class="w-6"
                     src="{{ asset('images/logo-icon-dark.svg') }}"
-                    alt="{{ auth()->user()->companies()->first()->name ?? 'Vacation Manager' }}"
+                    alt="{{ auth()->user()->company()->first()->name ?? 'Vacation Manager' }}"
                 />
-                <span class="ml-3 hidden text-lg text-white xl:block"> {{ auth()->user()->companies()->first()->name ?? 'Vacation Manager' }} </span>
+                <span class="ml-3 hidden text-lg text-white xl:block"> {{ auth()->user()->company()->first()->name ?? 'Vacation Manager' }} </span>
             </a>
             <div class="side-nav__divider my-6"></div>
             <ul>

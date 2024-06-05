@@ -21,14 +21,14 @@
             <img
                 class="w-6"
                 src="{{ asset('images/logo-icon-dark.svg') }}"
-                alt="{{ auth()->user()->companies()->first()->name ?? 'Vacation Manager' }}"
+                alt="{{ auth()->user()->company()->first()->name ?? 'Vacation Manager' }}"
             />
             <span @class([
                 'ml-3 text-lg text-white',
                 'hidden xl:block' => $layout == 'side-menu',
                 'hidden' => $layout == 'simple-menu',
             ])>
-                {{ auth()->user()->companies()->first()->name ?? 'Vacation Manager' }}
+                {{ auth()->user()->company()->first()->name ?? 'Vacation Manager' }}
             </span>
         </a>
         <!-- END: Logo -->

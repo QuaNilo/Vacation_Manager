@@ -14,7 +14,7 @@
                 <img
                     class="w-6"
                     src="{{ asset('images/logo-icon-dark.svg') }}"
-                    alt="{{ auth()->user()->companies()->first()->name ?? 'Vacation Manager' }}"
+                    alt="{{ auth()->user()->company()->first()->name ?? 'Vacation Manager' }}"
                 />
                 <span class="ml-3 text-lg text-white"> {{ auth()->user()->companies()->first()->name ?? 'Vacation Manager' }} </span>
             </a>
