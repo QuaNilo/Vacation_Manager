@@ -67,7 +67,6 @@ class Vacation extends Model implements Auditable
         'approved',
         'vacation_start',
         'vacation_end',
-        'vacation_days'
     ];
 
     protected function casts(): array
