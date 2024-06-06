@@ -38,12 +38,12 @@
         class="w-full {{ ($errors->has('approved') ? 'border-danger' : '') }}"
         id="approved"
         name="approved"
-        :value="old('approved', $edition->approved ?? '')"
+        :value="old('approved', $vacation->approved ?? '')"
         type="text"
     >
         <option >{{ __('Select an option') }}</option>
         @foreach(\App\Models\Vacation::getApprovedArray() as $key => $label)
-        <option value="{{ $key }}" {{ old('approved', $edition->approved ?? '') == $key ? 'selected' : '' }}>{{ $label }}</option>
+        <option value="{{ $key }}" {{ old('approved', $vacation->approved ?? '') == $key ? 'selected' : '' }}>{{ $label }}</option>
         @endforeach
     </x-base.form-select>
     @error('approved')

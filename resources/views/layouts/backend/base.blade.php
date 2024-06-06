@@ -21,7 +21,7 @@
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="{{ asset('/favicon/ms-icon-144x144.png') }}">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <script src=’https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js’></script>
+
         @if($enableRecaptcha && config('recaptchav3.enable'))
             {!! RecaptchaV3::initJs() !!}
         @endif
@@ -71,6 +71,7 @@
         @vite('resources/js/components/base/theme-color.js')
         @livewireScripts
         @stack('scripts')
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
         <!-- END: Pages, layouts, components JS Assets-->
         @if(config('livewire-ui-spotlight.enabled') && auth()->check())
             @livewire('livewire-ui-spotlight')
