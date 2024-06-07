@@ -72,6 +72,7 @@
         @livewireScripts
         @stack('scripts')
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <!-- END: Pages, layouts, components JS Assets-->
         @if(config('livewire-ui-spotlight.enabled') && auth()->check())
             @livewire('livewire-ui-spotlight')

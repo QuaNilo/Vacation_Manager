@@ -36,7 +36,7 @@ class StatisticsDashboard extends Component
     protected function getVacationDaysTakenYear()
     {
         return $this->user->vacations()
-            ->whereYear('vacation_start', Carbon::now()->year)
+            ->whereYear('start', Carbon::now()->year)
             ->sum('vacation_days');
     }
 

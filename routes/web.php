@@ -40,6 +40,8 @@ Route::middleware([
     Route::resource('user-team-requests', App\Http\Controllers\UserTeamRequestsController::class);
     Route::resource('vacations', App\Http\Controllers\VacationController::class);
     Route::get('/calendar', [App\Http\Controllers\CalendarController::class, 'index'])->name('calendar.index');
+    Route::get('/calendar/get-vacations', [App\Http\Controllers\CalendarController::class, 'getVacations'])->name('calendar.get-vacations');
+    Route::post('/calendar/update-selected-vacation', [App\Http\Controllers\CalendarController::class, 'UpdateSelectedVacation'])->name('calendar.update-selected-vacation');
     Route::post('/calendar/create', [App\Http\Controllers\CalendarController::class, 'create'])->name('calendar.create');
     Route::post('/calendar/remove', [App\Http\Controllers\CalendarController::class, 'remove'])->name('calendar.remove');
     Route::post('/calendar/edit', [App\Http\Controllers\CalendarController::class, 'edit'])->name('calendar.edit');

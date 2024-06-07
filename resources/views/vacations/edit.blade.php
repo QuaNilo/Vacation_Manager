@@ -10,7 +10,6 @@
             @csrf
             @method('PATCH')
             @include('vacations.fields')
-
             <div class="mt-5 text-right">
                 <x-base.button
                     class="mr-1 w-24"

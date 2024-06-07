@@ -22,7 +22,7 @@ class LatestVacationsTable extends Component
 
     private function getVacations()
     {
-        return $this->company->vacations()->orderByDesc('vacation_start')->get();
+        return $this->company->vacations()->orderByDesc('start')->get();
     }
 
     public function render()

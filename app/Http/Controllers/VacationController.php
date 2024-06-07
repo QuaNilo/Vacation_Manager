@@ -42,7 +42,7 @@ class VacationController extends Controller
             flash(__('Ups something went wrong'))->overlay()->danger();
         }
 
-        return redirect(route('vacations.index'));
+        return redirect(route('calendar.index'));
     }
 
     /**
@@ -73,7 +73,7 @@ class VacationController extends Controller
             flash(__('Ups something went wrong'))->overlay()->danger();
         }
 
-        return redirect(route('vacations.index'));
+        return redirect(route('calendar.index'));
     }
 
     /**

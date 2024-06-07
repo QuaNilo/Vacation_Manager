@@ -9,7 +9,6 @@
         <form action="{{ route('vacations.store') }}" method="POST" accept-charset="UTF-8">
             @csrf
             @include('vacations.fields')
-
             <div class="mt-5 text-right">
                 <x-base.button
                     class="mr-1 w-24"

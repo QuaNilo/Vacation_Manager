@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('vacations', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->string('title')->nullable();
             $table->integer('approved')->default(0)->comment('0 - Not Approved, 1 - Approved, 2 - Pending');
-            $table->date('vacation_start');
-            $table->date('vacation_end');
+            $table->date('start');
+            $table->date('end');
             $table->integer('vacation_days');
             $table->timestamps();
         });

@@ -31,8 +31,8 @@ class VacationFactory extends Factory
         return [
             'user_id' => fake()->word,
             'approved' => fake()->word,
-            'vacation_start' => fake()->date('Y-m-d'),
-            'vacation_end' => fake()->date('Y-m-d'),
+            'start' => fake()->date('Y-m-d'),
+            'end' => fake()->date('Y-m-d'),
             'vacation_days' => fake()->word,
             'created_at' => fake()->date('Y-m-d H:i:s'),
             'updated_at' => fake()->date('Y-m-d H:i:s')

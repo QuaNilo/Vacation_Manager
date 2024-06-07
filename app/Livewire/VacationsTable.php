@@ -40,13 +40,13 @@ class VacationsTable extends Component implements HasForms, HasTable
                 ->sortable()
                 ->toggleable()
                 ->searchable(),
-            TextColumn::make("vacation_start")
-                ->label($newModel->getAttributeLabel("vacation_start"))
+            TextColumn::make("start")
+                ->label($newModel->getAttributeLabel("start"))
                 ->sortable()
                 ->toggleable()
                 ->searchable(),
-            TextColumn::make("vacation_end")
-                ->label($newModel->getAttributeLabel("vacation_end"))
+            TextColumn::make("end")
+                ->label($newModel->getAttributeLabel("end"))
                 ->sortable()
                 ->toggleable()
                 ->searchable(),

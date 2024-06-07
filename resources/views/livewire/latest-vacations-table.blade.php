@@ -66,12 +66,12 @@
                         <x-base.table.td
                             class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
                         >
-                            {{ $vacation->vacation_start }}
+                            {{ $vacation->start }}
                         </x-base.table.td>
                         <x-base.table.td
                             class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
                         >
-                            {{ $vacation->vacation_end }}
+                            {{ $vacation->end }}
                         </x-base.table.td>
                         <x-base.table.td
                             class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"

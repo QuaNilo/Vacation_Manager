@@ -9,9 +9,16 @@ use Illuminate\Http\Request;
 
 class CalendarController extends Controller
 {
+
     public function index(Request $request)
     {
         return view('calendar.index');
+    }
+    public function getVacations(Request $request)
+    {
+        $vacations = Vacation::get();
+
+        return response()->json($vacations);
     }
 
     public function create(CreateVacationRequest $request)

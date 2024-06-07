@@ -4,11 +4,11 @@
     $users = $company->users()->get();
     $vacation = new \App\Models\Vacation();
 ?>
-    <div x-data="{ isOpen: false }" class="row justify-content-center">
+    <div x-data="{ isOpenCreate: false, isOpenEdit: false, event_data: {}}" id='calendarDiv' class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <x-base.button  class="bg-primary text-white" @click="isOpen = true">Create Vacation</x-base.button>
+                    <x-base.button  class="bg-primary text-white" @click="isOpenCreate = true">Create Vacation</x-base.button>
                 </div>
                 <div class="card-body">
                     <div id='calendar'></div>
@@ -16,23 +16,50 @@
             </div>
         </div>
 
-        <x-backend.calendar-modal-popup/>
+        <x-backend.calendar-modal-create-popup/>
+        <x-backend.calendar-modal-edit-popup/>
+
     </div>
 
 
-    @push('scripts')
-        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
+@push('scripts')
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            editable: true,
-            displayEventTime: false,
+                initialView: 'multiMonthYear',
+                editable: true,
+                displayEventTime: true,
+                displayEventEnd: true,
+                events: '{{ route('calendar.get-vacations') }}',
+
+                eventClick: function(events, jsEvent, view) {
+                    var calendarDiv = document.getElementById('calendarDiv');
+                    var x_data = Alpine.$data(calendarDiv);
+                    x_data.isOpenEdit = true;
+                    var vacationEditRoute = '{{ route('vacations.edit', ['vacation' => '__vacationId__']) }}';
+                    fetch(vacationEditRoute.replace('__vacationId__', events.event.id), {
+                        method: 'GET', // Change the method to GET
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        window.location.href = response.url;
+                    })
+                    .catch(error => {
+                        console.error('There was a problem with the fetch operation:', error);
+                    });
+                }
             });
             calendar.render();
-            });
-        </script>
-
-    @endpush
+        });
+    </script>
+@endpush
 </x-app-layout>
+
+
+

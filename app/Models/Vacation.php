@@ -14,8 +14,8 @@ use OwenIt\Auditing\Contracts\Auditable;
  * @property int $id
  * @property int $user_id
  * @property int $approved 0 - Not Approved, 1 - Approved, 2 - Pending
- * @property \Illuminate\Support\Carbon $vacation_start
- * @property \Illuminate\Support\Carbon $vacation_end
+ * @property \Illuminate\Support\Carbon $start
+ * @property \Illuminate\Support\Carbon $end
  * @property int $vacation_days
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -52,28 +52,28 @@ class Vacation extends Model implements Auditable
         parent::boot();
 
         static::creating(function ($vacation) {
-            // Calculate the difference in days between vacation_start and vacation_end
-            $start = Carbon::parse($vacation->vacation_start);
-            $end = Carbon::parse($vacation->vacation_end);
+            // Calculate the difference in days between start and end
+            $start = Carbon::parse($vacation->start);
+            $end = Carbon::parse($vacation->end);
             $durationInDays = abs($end->diffInDays($start));
-
             // Set the duration_in_days attribute in the model
             $vacation->vacation_days = $durationInDays;
+            $vacation->title = __("Ferias do") . ' ' . $vacation->user->name;
         });
     }
 
     public $fillable = [
         'user_id',
         'approved',
-        'vacation_start',
-        'vacation_end',
+        'start',
+        'end',
     ];
 
     protected function casts(): array
     {
         return [
-            'vacation_start' => 'date',
-        'vacation_end' => 'date'
+            'start' => 'date',
+            'end' => 'date'
         ];
     }
 
@@ -81,12 +81,13 @@ class Vacation extends Model implements Auditable
     {
         return [
             'user_id' => 'required',
-        'approved' => 'required',
-        'vacation_start' => 'required',
-        'vacation_end' => 'required',
-        'vacation_days' => 'nullable',
-        'created_at' => 'nullable',
-        'updated_at' => 'nullable'
+            'approved' => 'required',
+            'title' => 'nullable',
+            'start' => 'required',
+            'end' => 'required',
+            'vacation_days' => 'nullable',
+            'created_at' => 'nullable',
+            'updated_at' => 'nullable'
         ];
     }
 
@@ -99,13 +100,14 @@ class Vacation extends Model implements Auditable
     {
         return [
             'id' => __('Id'),
-        'user_id' => __('User Id'),
-        'approved' => __('Approved'),
-        'vacation_start' => __('Vacation Start'),
-        'vacation_end' => __('Vacation End'),
-        'vacation_days' => __('Vacation Days'),
-        'created_at' => __('Created At'),
-        'updated_at' => __('Updated At')
+            'title' => __('Title'),
+            'user_id' => __('User Id'),
+            'approved' => __('Approved'),
+            'start' => __('Vacation Start'),
+            'end' => __('Vacation End'),
+            'vacation_days' => __('Vacation Days'),
+            'created_at' => __('Created At'),
+            'updated_at' => __('Updated At')
         ];
     }
 
