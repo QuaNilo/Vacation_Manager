@@ -7,8 +7,9 @@
     <div x-data="{ isOpenCreate: false, isOpenEdit: false, event_data: {}}" id='calendarDiv' class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">
+                <div class="flex justify-end pb-5 pt-2">
                     <x-base.button  class="bg-primary text-white" @click="isOpenCreate = true">Create Vacation</x-base.button>
+                    <x-base.button  class="bg-primary text-white" ><a href="{{route('vacations.index')}}">Show List</a></x-base.button>
                 </div>
                 <div class="card-body">
                     <div id='calendar'></div>
