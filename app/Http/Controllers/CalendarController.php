@@ -16,7 +16,7 @@ class CalendarController extends Controller
     }
     public function getVacations(Request $request)
     {
-        $vacations = Vacation::get();
+        $vacations = Vacation::where('approved', Vacation::STATUS_APPROVED)->get();
 
         return response()->json($vacations);
     }

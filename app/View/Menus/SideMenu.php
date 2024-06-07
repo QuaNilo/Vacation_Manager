@@ -60,7 +60,7 @@ class SideMenu
                 ]
             ],
             'teams' => [
-                'icon' => 'teams',
+                'icon' => 'network',
                 'title' => __('Teams'),
                 'permissions' => Permission::PERMISSION_MANAGE_APP,
                 'sub_menu' => [
@@ -80,7 +80,7 @@ class SideMenu
                 ]
             ],
             'vacations' => [
-                'icon' => 'vacations',
+                'icon' => 'tree-palm',
                 'title' => __('Vacations'),
                 'permissions' => Permission::PERMISSION_MANAGE_APP,
                 'sub_menu' => [
