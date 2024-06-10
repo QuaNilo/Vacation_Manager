@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Citizen;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Tables\Actions\Action;
@@ -30,13 +31,14 @@ class VacationsTable extends Component implements HasForms, HasTable
         return $table
             ->query(Vacation::query())
             ->columns([
-                TextColumn::make("user_id")
-                ->label($newModel->getAttributeLabel("user_id"))
+                TextColumn::make("user.name")
+                ->label(__('Name'))
                 ->sortable()
                 ->toggleable()
                 ->searchable(),
             TextColumn::make("approved")
                 ->label($newModel->getAttributeLabel("approved"))
+                ->formatStateUsing(fn (Vacation $record): string => $record->approvedLabel)
                 ->sortable()
                 ->toggleable()
                 ->searchable(),

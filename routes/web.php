@@ -41,6 +41,7 @@ Route::middleware([
     Route::resource('vacations', App\Http\Controllers\VacationController::class);
     Route::get('/calendar', [App\Http\Controllers\CalendarController::class, 'index'])->name('calendar.index');
     Route::get('/calendar/get-vacations', [App\Http\Controllers\CalendarController::class, 'getVacations'])->name('calendar.get-vacations');
+    Route::get('/calendar/get-session-vacation', [App\Http\Controllers\CalendarController::class, 'getSessionVacation'])->name('calendar.get-session-vacation');
     Route::post('/calendar/update-selected-vacation', [App\Http\Controllers\CalendarController::class, 'UpdateSelectedVacation'])->name('calendar.update-selected-vacation');
     Route::post('/calendar/create', [App\Http\Controllers\CalendarController::class, 'create'])->name('calendar.create');
     Route::post('/calendar/remove', [App\Http\Controllers\CalendarController::class, 'remove'])->name('calendar.remove');

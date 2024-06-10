@@ -5,7 +5,7 @@
         $hideSidebar = false;
     }
 @endphp
-<!-- BEGIN: User Content -->
+    <!-- BEGIN: User Content -->
 <div class="col-span-12 {{ $hideSidebar ? "lg:col-span-12" : "lg:col-span-8" }}">
     <x-base.tab.group class="box overflow-hidden">
         <x-base.tab.list
@@ -96,7 +96,7 @@
 
                 </x-base.tab>
             @endif
-            @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
+            @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication() && !(request()->getPathInfo() === '/admin/users/create'))
                 <x-base.tab
                     id="two-factor-authentication-tab"
                     :fullWidth="false"
@@ -150,7 +150,7 @@
                     </x-base.tab.button>
                 </x-base.tab>
             @endif
-            @if (Laravel\Jetstream\Jetstream::hasAccountDeletionFeatures())
+            @if (Laravel\Jetstream\Jetstream::hasAccountDeletionFeatures() && !(request()->getPathInfo() === '/admin/users/create'))
                 <x-base.tab
                     id="delete-account-tab"
                     :fullWidth="false"
@@ -249,7 +249,7 @@
                         :value="old('roles', $user->roles ?? '')"
                         multiple
                     >
-                        <option ></option>
+                        <option></option>
                         @foreach($roles as $key => $label)
                             <option value="{{ $key }}">{{ $label }}</option>
                         @endforeach

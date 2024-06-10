@@ -46,8 +46,8 @@
         "@fullcalendar/timegrid": "^6.1.7",
         "@iconscout/unicons": "^4.0.8",
         "@left4code/tw-starter": "^4.0.1",
-        "@popperjs/core": "^2.11.0",
         "@mdi/font": "^7.4.47",
+        "@popperjs/core": "^2.11.0",
         "animate.css": "^4.1.1",
         "chart.js": "^4.4.0",
         "choices.js": "^10.2.0",
@@ -61,11 +61,13 @@
         "highlight.js": "^11.6.0",
         "intl-tel-input": "^19.0.1",
         "jarallax": "^2.2.0",
+        "jquery": "^3.7.1",
         "js-beautify": "^1.14.6",
         "leaflet": "^1.9.3",
         "leaflet.markercluster": "^1.5.3",
         "litepicker": "^2.0.12",
         "lucide": "^0.372.0",
+        "particles.js": "^2.0.0",
         "pristinejs": "^1.0.0",
         "shufflejs": "^6.1.0",
         "simplebar": "^5.3.9",
@@ -79,8 +81,7 @@
         "tom-select": "^2.2.2",
         "wow.js": "^1.2.2",
         "xlsx": "^0.18.5",
-        "zoom-vanilla.js": "^2.0.6",
-        "particles.js": "^2.0.0"
+        "zoom-vanilla.js": "^2.0.6"
     },
     "devDependencies": {
         "@ckeditor/ckeditor5-dev-translations": "^32.1.2",
@@ -89,7 +90,9 @@
         "@tailwindcss/typography": "^0.5.10",
         "autoprefixer": "^10.4.16",
         "axios": "^1.6.4",
+        "clean-css": "^5.3.2",
         "cross-env": "^7.0.3",
+        "del": "4.1.1",
         "laravel-vite-plugin": "^1.0",
         "lodash": "^4.17.19",
         "postcss": "^8.4.32",
@@ -99,8 +102,6 @@
         "sass": "^1.69.5",
         "tailwindcss": "^3.4.1",
         "vite": "^5.0.0",
-        "vite-plugin-static-copy": "^0.17.0",
-        "clean-css": "^5.3.2",
-        "del": "4.1.1"
+        "vite-plugin-static-copy": "^0.17.0"
     }
 }

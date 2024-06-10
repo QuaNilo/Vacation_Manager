@@ -4,6 +4,7 @@
     $users = $company->users()->get();
     $vacation = new \App\Models\Vacation();
 ?>
+
     <div x-data="{ isOpenCreate: false, isOpenEdit: false, event_data: {}}" id='calendarDiv' class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -16,15 +17,16 @@
                 </div>
             </div>
         </div>
-
         <x-backend.calendar-modal-create-popup/>
-        <x-backend.calendar-modal-edit-popup/>
+        <livewire:calendar-edit-pop-up />
 
     </div>
-
-
+@push('firstScripts')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+@endpush
 @push('scripts')
     <script type="text/javascript">
+        $.noConflict();
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -37,23 +39,10 @@
                 eventClick: function(events, jsEvent, view) {
                     var calendarDiv = document.getElementById('calendarDiv');
                     var x_data = Alpine.$data(calendarDiv);
+                    var eventId = events.event.id;
+                    Livewire.dispatch('vacationUpdated', {id: eventId});
+
                     x_data.isOpenEdit = true;
-                    var vacationEditRoute = '{{ route('vacations.edit', ['vacation' => '__vacationId__']) }}';
-                    fetch(vacationEditRoute.replace('__vacationId__', events.event.id), {
-                        method: 'GET', // Change the method to GET
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        }
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        window.location.href = response.url;
-                    })
-                    .catch(error => {
-                        console.error('There was a problem with the fetch operation:', error);
-                    });
                 }
             });
             calendar.render();
