@@ -23,7 +23,7 @@ class CheckCompany
         if ($user && !$user->company()->first()) {
             // Redirect to the company creation route
             flash('You need to associate with a company')->overlay()->warning()->duration(4000);
-            return redirect()->route('companies.create');
+            return redirect()->route('dashboard.apply-register-company');
         }
         return $next($request);
     }

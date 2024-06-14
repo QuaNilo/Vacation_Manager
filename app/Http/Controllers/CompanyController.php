@@ -17,7 +17,15 @@ class CompanyController extends Controller
     {
         return view('companies.index');
     }
+    public function join(Request $request)
+    {
+        return view('apply_register_company.join-company');
+    }
 
+    public function requestJoin(Request $request)
+    {
+        dd($request);
+    }
     /**
      * Show the form for creating a new Company.
      */

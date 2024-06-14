@@ -1,27 +1,30 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+Route::middleware(['check.company'])->group(function () {
+    Route::get('/', [\App\Http\Controllers\SiteController::class, 'index'])->name('home');
+    Route::get('/warning/{message}', [\App\Http\Controllers\WarningHelper::class, 'display_warning_back'])->name('display_warning');
+    Route::get('/warning/{message}', [\App\Http\Controllers\WarningHelper::class, 'display_warning'])->name('display_warning');
 
-Route::get('/', [\App\Http\Controllers\SiteController::class, 'index'])->name('home');
-Route::get('/warning/{message}', [\App\Http\Controllers\WarningHelper::class, 'display_warning_back'])->name('display_warning');
-Route::get('/warning/{message}', [\App\Http\Controllers\WarningHelper::class, 'display_warning'])->name('display_warning');
+    Route::get('/admin/cookies-policy', [\App\Http\Controllers\DashboardController::class,'cookiesPolicy'])->name('dashboard.cookies_policy');
+    Route::get('/admin/privacy-policy', [\App\Http\Controllers\DashboardController::class,'privacyPolicy'])->name('dashboard.privacy_policy');
+    Route::get('/admin/terms-of-service', [\App\Http\Controllers\DashboardController::class,'termsOfService'])->name('dashboard.terms_of_service');
 
-Route::get('/admin/cookies-policy', [\App\Http\Controllers\DashboardController::class,'cookiesPolicy'])->name('dashboard.cookies_policy');
-Route::get('/admin/privacy-policy', [\App\Http\Controllers\DashboardController::class,'privacyPolicy'])->name('dashboard.privacy_policy');
-Route::get('/admin/terms-of-service', [\App\Http\Controllers\DashboardController::class,'termsOfService'])->name('dashboard.terms_of_service');
-
-Route::get('theme-switcher/{activeTheme}', [\App\Http\Controllers\ThemeController::class, 'switch'])->name('theme-switcher');
-Route::get('layout-switcher/{activeLayout}', [\App\Http\Controllers\LayoutController::class, 'switch'])->name('layout-switcher');
-Route::get('calendar', [\App\Http\Controllers\SiteCalendar::class, 'index'])->name('site.calendar');
-Route::get('profile/password', [\App\Http\Controllers\SiteProfileController::class, 'passwordShow'])->name('site.password-show');
+    Route::get('theme-switcher/{activeTheme}', [\App\Http\Controllers\ThemeController::class, 'switch'])->name('theme-switcher');
+    Route::get('layout-switcher/{activeLayout}', [\App\Http\Controllers\LayoutController::class, 'switch'])->name('layout-switcher');
+    Route::get('calendar', [\App\Http\Controllers\SiteCalendar::class, 'index'])->name('site.calendar');
+    Route::get('profile/password', [\App\Http\Controllers\SiteProfileController::class, 'passwordShow'])->name('site.password-show');
+});
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-    'manager.access'
 ])->prefix('admin')->group(function () {
     Route::resource('companies', App\Http\Controllers\CompanyController::class);
+    Route::get('/apply-register/company', [\App\Http\Controllers\DashboardController::class,'apply_register_company_index'])->name('dashboard.apply-register-company');
+    Route::get('/apply-register/company/join', [\App\Http\Controllers\CompanyController::class,'join'])->name('companies.join');
+    Route::post('/apply-register/company/request-join', [\App\Http\Controllers\CompanyController::class,'requestJoin'])->name('companies.request-join');
 });
 
 
@@ -46,7 +49,6 @@ Route::middleware([
     Route::post('/calendar/create', [App\Http\Controllers\CalendarController::class, 'create'])->name('calendar.create');
     Route::post('/calendar/remove', [App\Http\Controllers\CalendarController::class, 'remove'])->name('calendar.remove');
     Route::post('/calendar/edit', [App\Http\Controllers\CalendarController::class, 'edit'])->name('calendar.edit');
-
     Route::impersonate();
 
     Route::resource('settings', App\Http\Controllers\SettingController::class);

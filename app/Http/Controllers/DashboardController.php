@@ -25,6 +25,11 @@ class   DashboardController extends Controller
         return view('dashboard.index');
     }
 
+    public function apply_register_company_index()
+    {
+        return view('apply_register_company.index');
+    }
+
 
     /**
      * Show the Cookies page
