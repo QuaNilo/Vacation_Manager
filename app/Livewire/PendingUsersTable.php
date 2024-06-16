@@ -9,12 +9,9 @@ use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\BulkAction;
 use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
-use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Table;
@@ -25,7 +22,7 @@ use Livewire\Component;
 use App\Models\User;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
-class UsersTable extends Component implements HasForms, HasTable
+class PendingUsersTable extends Component implements HasForms, HasTable
 {
     use InteractsWithTable;
     use InteractsWithForms;
@@ -34,12 +31,12 @@ class UsersTable extends Component implements HasForms, HasTable
         $newModel = new User();
         $authenticatedUserCompany = auth()->user()->company()->first();
         if ($authenticatedUserCompany) {
-            // Build the query to fetch users with the same company
             $query = User::query()->with('roles', 'company')
                 ->whereHas('company', function ($query) use ($authenticatedUserCompany) {
                     $query->where('companies.id', $authenticatedUserCompany->id)
-                        ->whereNotIn('company_join_request', [User::STATUS_JOIN_REQUEST_PENDING]);
+                    ->where('company_join_request', User::STATUS_JOIN_REQUEST_PENDING);
                 });
+
         }
 
         return $table
@@ -102,26 +99,30 @@ class UsersTable extends Component implements HasForms, HasTable
                     }),
             ])
             ->actions([
-
-                //->color('danger')
-                ActionGroup::make([
-                    Action::make('view')
-                        ->label(__('View'))
-                        ->url(fn (User $record): string => route('users.show', ['user' => $record]))
-                        ->icon('heroicon-o-eye'),
+                Action::make('view')
+                    ->label(__('View'))
+                    ->url(fn (User $record): string => route('users.show', ['user' => $record]))
+                    ->icon('heroicon-o-eye'),
                     Action::make('edit')
                         ->label(__('Update'))
                         ->url(fn (User $record): string => route('users.edit', ['user' => $record]))
                         ->icon('heroicon-o-pencil'),
-                    Action::make('impersonate')
-                        ->label(__('Impersonate'))
-                        ->url(fn (User $record): string => route('impersonate', $record->id))
-                        //->action(fn (User $record): bool => auth()->user()->impersonate($record, 'web'))
-                        ->icon('heroicon-o-users')
-                        ->visible(fn (User $record): bool => auth()->user()->id != $record->id && (auth()->user()->can('adminFullApp'))),
+//                    Action::make('impersonate')
+//                        ->label(__('Impersonate'))
+//                        ->url(fn (User $record): string => route('impersonate', $record->id))
+//                        //->action(fn (User $record): bool => auth()->user()->impersonate($record, 'web'))
+//                        ->icon('heroicon-o-users')
+//                        ->visible(fn (User $record): bool => auth()->user()->id != $record->id && (auth()->user()->can('adminFullApp'))),
                         //->authorize(fn (User $record): bool => auth()->user()->id != $record->id && (auth()->user()->can('adminFullApp'))),
+                    Action::make('Approve')
+                        ->label(__('Approve'))
+                        ->url(fn (User $record): string => route('companies.users.approve', ['user' => $record]))
+                        ->icon('heroicon-o-pencil'),
                     DeleteAction::make()
-                ])->iconButton()
+
+//                //->color('danger')
+//                ActionGroup::make([
+//                ])->iconButton()
             ])
             ->bulkActions([
                 //BulkActionGroup::make([
@@ -143,6 +144,6 @@ class UsersTable extends Component implements HasForms, HasTable
 
     public function render() : View
     {
-        return view('users.table');
+        return view('users.pending-users-table');
     }
 }

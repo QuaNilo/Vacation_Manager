@@ -42,6 +42,11 @@ Breadcrumbs::for('users.own_edit', function (BreadcrumbTrail $trail, $user) {
     $trail->push(__('Update'), route('users.edit', $user));
 });
 
+Breadcrumbs::for('companies.users.pending', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Pending Users');
+});
+
 Breadcrumbs::for('api-tokens.index', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
     $trail->push(__('API Tokens'), route('api-tokens.index'));
@@ -71,19 +76,6 @@ Breadcrumbs::for('calendar.index', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
     $trail->push(__('Calendar'), route('calendar.index'));
 });
-//Breadcrumbs::for('roles.create', function (BreadcrumbTrail $trail) {
-//    $trail->parent('roles.index');
-//    $trail->push(__('Create'), route('roles.create'));
-//});
-//Breadcrumbs::for('roles.show', function (BreadcrumbTrail $trail, $model) {
-//    $trail->parent('roles.index');
-//    $trail->push($model->name, route('roles.show', $model));
-//});
-//Breadcrumbs::for('roles.edit', function (BreadcrumbTrail $trail, $model) {
-//    $trail->parent('roles.show', $model);
-//    $trail->push(__('Update'), route('roles.edit', $model));
-//});
-
 
 
 // Home > Settings
@@ -178,12 +170,6 @@ Breadcrumbs::for('vacations.edit', function (BreadcrumbTrail $trail, $model) {
     $trail->push(__('Update'), route('vacations.edit', $model));
 });
 
-
-// Home > Company
-//Breadcrumbs::for('companies.index', function (BreadcrumbTrail $trail) {
-//    $trail->parent('home');
-//    $trail->push(__('Company'), route('companies.index'));
-//});
 Breadcrumbs::for('companies.create', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
     $trail->push(__('Create'), route('companies.create'));
@@ -197,22 +183,8 @@ Breadcrumbs::for('companies.edit', function (BreadcrumbTrail $trail, $model) {
     $trail->push(__('Update'), route('companies.edit', $model));
 });
 
-
-/*
-// Home > Blog
-Breadcrumbs::for('blog', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('companies.dashboard', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
-    $trail->push('Blog', route('blog'));
+    $trail->push(__('Dashboard'), route('companies.dashboard'));
 });
 
-// Home > Blog > [Category]
-Breadcrumbs::for('category', function (BreadcrumbTrail $trail, $category) {
-    $trail->parent('blog');
-    $trail->push($category->title, route('category', $category->id));
-});
-
-// Home > Blog > [Category] > [Post]
-Breadcrumbs::for('post', function (BreadcrumbTrail $trail, $post) {
-    $trail->parent('category', $post->category);
-    $trail->push($post->title, route('post', $post->id));
-});*/

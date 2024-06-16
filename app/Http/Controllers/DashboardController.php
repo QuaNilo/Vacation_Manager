@@ -17,11 +17,6 @@ class   DashboardController extends Controller
      */
     public function index()
     {
-        //flash('Mensagem no canto superior direito')->success();
-        //flash('Mensagem de informação no canto superior direito')->info();
-        //flash('Mensagem de danger')->danger();
-        //flash('Mensagem de warning')->warning();
-
         return view('dashboard.index');
     }
 

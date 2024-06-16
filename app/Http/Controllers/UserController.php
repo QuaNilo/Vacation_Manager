@@ -43,6 +43,27 @@ class UserController extends Controller
         return view('users.create', compact('user', 'roles'));
     }
 
+    public function companyUsersPending(Request $request){
+        return view('users.pending');
+    }
+
+    public function companyUsersApprove(User $user)
+    {
+        if($user){
+            $updateSuccessful = $user->update([
+                    'company_join_request' => '1',
+            ]);
+            if($updateSuccessful){
+                flash('Approved User successfuly.')->overlay()->success()->duration(4000);
+            }else{
+                flash('Failed to Approve user.')->overlay()->warning()->duration(4000);
+            }
+        }else{
+            flash('Failed to get user')->overlay()->warning()->duration(4000);
+        }
+                return redirect()->back();
+    }
+
     /**
      * Store a newly created User in storage.
      */

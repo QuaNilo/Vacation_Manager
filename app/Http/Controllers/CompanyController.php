@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
-//use App\Http\Controllers\AppBaseController;
 use App\Models\Company;
 use Illuminate\Http\Request;
 
@@ -22,9 +21,59 @@ class CompanyController extends Controller
         return view('apply_register_company.join-company');
     }
 
-    public function requestJoin(Request $request)
+public function requestJoin(Request $request)
+{
+    $company = Company::where('name', $request->company_name)->first();
+
+    if ($company) {
+        // Retrieve the authenticated user
+        $user = auth()->user();
+
+        if ($user) {
+            $updateSuccessful = $user->update([
+                'company_id' => $company->id,
+                'company_join_request' => '2',
+            ]);
+
+            if ($updateSuccessful) {
+                flash('Request submitted')->overlay()->success()->duration(4000);
+            } else {
+                flash('Failed to update the user')->overlay()->warning()->duration(4000);
+            }
+        } else {
+            flash('User not authenticated')->overlay()->warning()->duration(4000);
+        }
+    } else {
+        flash('Company not found')->overlay()->warning()->duration(4000);
+    }
+
+    // Optional: Return a response or redirect
+    return redirect()->back();
+}
+
+    public function deleteJoin(Request $request){
+        $user = auth()->user();
+
+        if ($user) {
+            $updateSuccessful = $user->update([
+                'company_id' => null,
+                'company_join_request' => '3',
+            ]);
+
+            if ($updateSuccessful) {
+                flash('Company request canceled successfully.')->overlay()->success()->duration(4000);
+            } else {
+                flash('Failed to cancel the company request.')->overlay()->warning()->duration(4000);
+            }
+        } else {
+            flash('User not authenticated')->overlay()->warning()->duration(4000);
+        }
+        return redirect()->back();
+    }
+
+    public function companyDashboard(Request $request)
     {
-        dd($request);
+        return view('companies.company-dashboard');
     }
     /**
      * Show the form for creating a new Company.

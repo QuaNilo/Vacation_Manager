@@ -25,6 +25,7 @@ Route::middleware([
     Route::get('/apply-register/company', [\App\Http\Controllers\DashboardController::class,'apply_register_company_index'])->name('dashboard.apply-register-company');
     Route::get('/apply-register/company/join', [\App\Http\Controllers\CompanyController::class,'join'])->name('companies.join');
     Route::post('/apply-register/company/request-join', [\App\Http\Controllers\CompanyController::class,'requestJoin'])->name('companies.request-join');
+    Route::delete('/apply-register/company/delete-join', [\App\Http\Controllers\CompanyController::class,'deleteJoin'])->name('companies.delete-join');
 });
 
 
@@ -37,7 +38,10 @@ Route::middleware([
 ])->prefix('admin')->group(function () {
     Route::get('/', [\App\Http\Controllers\DashboardController::class,'index'])->name('dashboard');
 
+    Route::get('/company/dashboard', [\App\Http\Controllers\CompanyController::class,'companyDashboard'])->name('companies.dashboard');
     Route::patch('/user/profile', [App\Http\Controllers\UserController::class, 'updateMe'])->name('users.update_me');
+    Route::get('/company/users/pending', [App\Http\Controllers\UserController::class, 'companyUsersPending'])->name('companies.users.pending');
+    Route::get('/company/users/approve/{user}', [App\Http\Controllers\UserController::class, 'companyUsersApprove'])->name('companies.users.approve');
     Route::resource('users', App\Http\Controllers\UserController::class);
     Route::resource('teams', App\Http\Controllers\TeamController::class);
     Route::resource('user-team-requests', App\Http\Controllers\UserTeamRequestsController::class);

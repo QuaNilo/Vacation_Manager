@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->foreignId('company_id')->nullable();
+            $table->integer('company_join_request')->default(3)->comment('0 - Denied, 1 - Accepted, 2 - Pending, 3 - No request');
             $table->foreignId('team_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();

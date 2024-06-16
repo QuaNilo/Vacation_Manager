@@ -82,6 +82,10 @@ class User extends Authenticatable implements MustVerifyEmail, Auditable
     use LoadDefaults;
     use Impersonate;
 
+    const STATUS_JOIN_REQUEST_DENIED = 0;
+    const STATUS_JOIN_REQUEST_ACCEPTED = 1;
+    const STATUS_JOIN_REQUEST_PENDING = 2;
+    const STATUS_JOIN_REQUEST_NO_REQUEST = 3;
     /**
      * The attributes that are mass assignable.
      *
@@ -91,7 +95,8 @@ class User extends Authenticatable implements MustVerifyEmail, Auditable
         'name',
         'email',
         'password',
-
+        'company_id',
+        'company_join_request',
     ];
 
     /**
@@ -203,6 +208,22 @@ class User extends Authenticatable implements MustVerifyEmail, Auditable
             return $splitName[0];
         else
             return "";
+    }
+
+        public function getCompanyJoinRequestLabelAttribute() : string
+    {
+        $array = static::getStatusArray();
+        return $array[$this->status] ?? "";
+    }
+
+        public static function getStatusArray() : array
+    {
+        return [
+            self::STATUS_JOIN_REQUEST_DENIED =>  __('Rejeitado'),
+            self::STATUS_JOIN_REQUEST_ACCEPTED =>  __('Aprovado'),
+            self::STATUS_JOIN_REQUEST_PENDING =>  __('Pendente'),
+            self::STATUS_JOIN_REQUEST_NO_REQUEST =>  __('Inexistente'),
+        ];
     }
 
     /**

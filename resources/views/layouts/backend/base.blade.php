@@ -54,6 +54,7 @@
         @stack('styles')
     </head>
     <body >
+        <x-notification-handler />
         {{ $slot }}
 
         @stack('firstScripts')

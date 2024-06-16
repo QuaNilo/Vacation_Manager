@@ -24,6 +24,26 @@ class SideMenu
                 'route_name' => 'calendar.index',
                 'params' => [],
             ],
+            'Company' => [
+                'icon' => 'company',
+                'title' => __('Company'),
+                'permissions' => Permission::PERMISSION_MANAGE_APP,
+                'sub_menu' => [
+                    'companies.dashboard' => [
+                        'icon' => 'list',
+                        'route_name' => 'companies.dashboard',
+                        'params' => [],
+                        'title' => __('Dashboard')
+                    ],
+                    'users.pending' => [
+                        'icon' => 'plus-circle',
+                        'route_name' => 'companies.users.pending',
+                        'params' => [],
+                        'title' => __('Pending Users'),
+
+                    ],
+                ]
+            ],
 //            'demos.*' => [
 //                'icon' => 'files',
 //                'route_name' => 'demos.index',

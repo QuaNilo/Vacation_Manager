@@ -29,6 +29,5 @@
     <!-- BEGIN: HTML Table Data -->
     <div class="mt-8">
         <livewire:users-table />
-
     </div>
 </x-app-layout>
