@@ -25,12 +25,12 @@ class SideMenu
                 'params' => [],
             ],
             'Company' => [
-                'icon' => 'company',
+                'icon' => 'building',
                 'title' => __('Company'),
                 'permissions' => Permission::PERMISSION_MANAGE_APP,
                 'sub_menu' => [
                     'companies.dashboard' => [
-                        'icon' => 'list',
+                        'icon' => 'line-chart',
                         'route_name' => 'companies.dashboard',
                         'params' => [],
                         'title' => __('Dashboard')
