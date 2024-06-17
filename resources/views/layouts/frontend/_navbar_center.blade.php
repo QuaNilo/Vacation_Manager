@@ -1,6 +1,6 @@
 <!-- Start Navbar -->
-<nav id="topnav" class="defaultscroll is-sticky">
-    <div class="container relative">
+<nav id="topnav" class="fixed top-0 border-4 border-blue-700-500 w-full bg-white z-50">
+    <div class="container mx-auto">
         <!-- Logo container-->
         <a class="logo" href="{{ route('home') }}">
             <img src="{{ asset('images/logo-dark.png') }}" class="inline-block dark:hidden h-9" alt="{{ config('app.name', 'Laravel') }}">
@@ -21,7 +21,6 @@
                 <!-- End mobile menu toggle-->
             </div>
         </div>
-
         @guest
             <!--Login button Start-->
             <ul class="buy-button list-none mb-0">
@@ -38,6 +37,7 @@
         @else
             <!--Login button Start-->
             <ul class="buy-button list-none mb-0">
+                <span class="mr-2">{{ auth()->user()->name}}</span>
                 <li class="inline mb-0">
                     <a href="{{ route('profile.show') }}" class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-indigo-600/5 hover:bg-indigo-600 border border-indigo-600/10 hover:border-indigo-600 text-indigo-600 hover:text-white"><i data-feather="settings" class="size-4"></i></a>
                 </li>

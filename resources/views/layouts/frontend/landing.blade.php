@@ -60,7 +60,7 @@
     </head>
 
     <body class="font-nunito text-base text-black dark:text-white dark:bg-slate-900 flex flex-col min-h-screen">
-        <div class="flex-grow">
+        <div class="">
             <!-- Loader Start -->
             <!-- <div id="preloader">
                 <div id="status">
@@ -94,6 +94,8 @@
 
         @livewireScripts
         @stack('scripts')
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     </body>
 
 </html>

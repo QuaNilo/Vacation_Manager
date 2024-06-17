@@ -2,7 +2,7 @@
 /*         Menu                  */
 /*===============================*/
 #topnav {
-    @apply fixed start-0 end-0 top-0 z-999 bg-transparent border-0 duration-500;
+    @apply bg-transparent border-0 duration-500;
     .logo {
         @apply ltr:float-left rtl:float-right text-black dark:text-white #{!important};
         .l-dark {
@@ -156,12 +156,12 @@
         @apply ltr:float-left rtl:float-right block relative my-0 mx-[10px];
         > a {
           @apply block text-black dark:text-white text-[13px] bg-transparent font-bold tracking-[1px] leading-6 uppercase px-[14px] #{!important};
-          &:hover, 
+          &:hover,
           &:active {
             @apply text-indigo-600;
           }
         }
-        &:hover, 
+        &:hover,
         &.active{
           > a {
             @apply text-indigo-600 dark:text-indigo-600 #{!important};
@@ -200,7 +200,7 @@
           > .menu-arrow {
             @apply border-black dark:border-white;
           }
-          &:hover, 
+          &:hover,
           &.active{
             > a {
               @apply text-indigo-600;
@@ -237,14 +237,14 @@
                 @apply text-indigo-600 dark:text-indigo-600 #{!important};
               }
             }
-            &:hover, 
+            &:hover,
             &.active{
               > .menu-arrow {
                 @apply border-indigo-600 #{!important};
               }
             }
-            
-            &:hover, 
+
+            &:hover,
             &.active {
               > a {
                 @apply text-indigo-600 dark:text-indigo-600 #{!important};
@@ -271,7 +271,7 @@
           @apply hidden;
         }
       }
-      
+
       .logo {
         .l-dark {
           @apply inline-block;
@@ -390,7 +390,7 @@
             @apply border-indigo-600 dark:border-indigo-600;
           }
         }
-        &:hover, 
+        &:hover,
         &.active{
           > a {
             @apply text-indigo-600 dark:text-indigo-600 #{!important};
@@ -569,7 +569,7 @@
       }
     }
   }
-  
+
   #navigation {
     @apply absolute top-[74px] start-0 w-full hidden h-auto bg-white dark:bg-slate-900 overflow-auto;
     &.open {
@@ -655,7 +655,7 @@
     @apply top-[59px] #{!important};
   }
 }
-  
+
 .sidebar-nav {
       > .navbar-item {
         &:hover,
