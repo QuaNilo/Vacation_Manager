@@ -92,7 +92,7 @@ class UserController extends Controller
             Mail::to($user->email)->send(new MagicLinkEmail($user, $url_magicLink));
 
             event(new Registered($user));
-            flash(__('Saved successfully.'))->overlay()->success();
+            flash(__('Login link sent to email : ' . $user->email))->overlay()->success();
         }else{
             flash(__('Ups something went wrong'))->overlay()->danger();
         }

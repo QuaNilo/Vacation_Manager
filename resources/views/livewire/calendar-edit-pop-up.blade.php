@@ -10,8 +10,10 @@
                     <input id="title" type="hidden" name="title">
                     <x-base.button type="button" @click="isOpenEdit = false" class="mb-4">Close</x-base.button>
                     <x-base.button type="submit" @click="isOpenEdit = false" class="mb-4">Update</x-base.button>
+                    <x-base.button type="button" wire:click="deleteVacation({{$vacation->id}})" class="mb-4">Delete</x-base.button>
                 </div>
             </form>
+
         </div>
     </div>
 </div>

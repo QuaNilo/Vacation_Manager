@@ -20,6 +20,7 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
+    'check.not.company'
 ])->prefix('admin')->group(function () {
     Route::resource('companies', App\Http\Controllers\CompanyController::class);
     Route::get('/apply-register/company', [\App\Http\Controllers\DashboardController::class,'apply_register_company_index'])->name('dashboard.apply-register-company');

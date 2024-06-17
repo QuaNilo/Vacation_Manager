@@ -1,4 +1,8 @@
 <div id="input-div" class="flex flex-col text-white h-fit w-full max-w-screen-lg bg-primary/70">
+    <a href="{{route('dashboard.apply-register-company')}}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+    </a>
+
     @if($hasPendingRequest)
         <div class="p-10">
             <div class="flex flex-col justify-center items-center">

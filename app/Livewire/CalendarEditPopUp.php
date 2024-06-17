@@ -21,6 +21,16 @@ class CalendarEditPopUp extends Component
         $this->vacation = Vacation::find($this->selectedVacationId) ?? new Vacation();
     }
 
+    public function deleteVacation($id){
+        $vacation = Vacation::find($id);
+        if($vacation){
+            $vacation->delete();
+            flash(__('Vacation deleted successfully'))->overlay()->success()->duration(4000);
+        }else{
+            flash(__('Vacation not found'))->overlay()->warning()->duration(4000);
+        }
+        return redirect(route('calendar.index'));
+    }
     public function render()
     {
         return view('livewire.calendar-edit-pop-up');
