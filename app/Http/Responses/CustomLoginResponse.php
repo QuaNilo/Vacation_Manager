@@ -15,7 +15,7 @@ class CustomLoginResponse implements LoginResponseContract
         if ($user->hasRole([Role::ROLE_SUPER_ADMIN, Role::ROLE_ADMIN, Role::ROLE_MANAGER])) {
             return redirect()->route('dashboard');
         } else {
-            return redirect()->route('home');
+            return redirect()->route('frontoffice.home');
         }
     }
 }

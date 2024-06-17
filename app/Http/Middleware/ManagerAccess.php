@@ -26,6 +26,6 @@ class ManagerAccess
         }
 
         // Redirect or return response for unauthorized access
-        return redirect()->route('home'); // Redirect to home route or show error message
+        return redirect()->route('frontoffice.home');
     }
 }

@@ -15,7 +15,7 @@
                 <div class="py-[60px] px-0">
                     <div class="grid md:grid-cols-12 grid-cols-1 gap-[30px]">
                         <div class="lg:col-span-3 md:col-span-12">
-                            <a href="{{ route('home') }}" class="text-[22px] focus:outline-none">
+                            <a href="{{ route('frontoffice.home') }}" class="text-[22px] focus:outline-none">
                                 <img src="{{ asset('images/logo-light.png') }}" class="h-12" alt="{{ config('app.name', 'Laravel') }}">
                             </a>
                             <p class="mt-6 text-gray-300">{{ 'Some text' }}</p>
@@ -51,7 +51,7 @@
                                 @if(false)
                                     <li class="mt-[10px]"><a href="#services" class="text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="uil uil-angle-right-b"></i> {{ __('Services') }}</a></li>
                                 @endif
-                                <li class="mt-[10px]"><a href="{{ route('home') }}#price" class="text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="uil uil-angle-right-b"></i> {{ __('Pricing') }}</a></li>
+                                <li class="mt-[10px]"><a href="{{ route('frontoffice.home') }}#price" class="text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="uil uil-angle-right-b"></i> {{ __('Pricing') }}</a></li>
                             </ul>
                         </div><!--end col-->
 

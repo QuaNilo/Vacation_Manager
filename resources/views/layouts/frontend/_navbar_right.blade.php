@@ -2,7 +2,7 @@
 <nav id="topnav" class="defaultscrollis-sticky">
     <div class="container relative">
         <!-- Logo container-->
-        <a class="logo" href="{{ route('home') }}">
+        <a class="logo" href="{{ route('frontoffice.home') }}">
             <img src="{{ asset('images/logo-dark.png') }}" class="inline-block dark:hidden h-9" alt="{{ config('app.name', 'Laravel') }}">
             <img src="{{ asset('images/logo-light.png') }}" class="hidden dark:inline-block h-9" alt="{{ config('app.name', 'Laravel') }}">
         </a>
@@ -53,9 +53,9 @@
         <div id="navigation">
             <!-- Navigation Menu-->
             <ul class="navigation-menu !justify-end">
-                <li><a href="{{ route('home') }}" class="sub-menu-item {{ request()->routeIs('home') ? "active" : "" }}">{{ __('Home') }}</a></li>
+                <li><a href="{{ route('frontoffice.home') }}" class="sub-menu-item {{ request()->routeIs('home') ? "active" : "" }}">{{ __('Home') }}</a></li>
 
-                <li><a href="{{ route('home') }}#price" class="sub-menu-item ">{{ __('Price') }}</a></li>
+                <li><a href="{{ route('frontoffice.home') }}#price" class="sub-menu-item ">{{ __('Price') }}</a></li>
                 @if(false)
                 <li><a href="{{ route('contacts.create') }}" class="sub-menu-item">{{ __('Contacts') }}</a></li>
                 @endif

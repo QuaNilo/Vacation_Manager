@@ -21,4 +21,8 @@ class SiteController extends Controller
         return view('site.index');
     }
 
+    public function dashboard() : View
+    {
+        return view('site.dashboard');
+    }
 }

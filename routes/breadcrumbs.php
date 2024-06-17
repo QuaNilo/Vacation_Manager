@@ -13,7 +13,7 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
     $trail->push(__('Home'), route('dashboard'), ['isHome' => true]);
 });
 Breadcrumbs::for('home-frontend', function (BreadcrumbTrail $trail) {
-    $trail->push(__('Home'), route('home'), ['isHome' => true]);
+    $trail->push(__('Home'), route('frontoffice.home'), ['isHome' => true]);
 });
 
 // Home > User

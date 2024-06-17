@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 Route::middleware(['check.company'])->group(function () {
-    Route::get('/', [\App\Http\Controllers\SiteController::class, 'index'])->name('home');
+    Route::get('/', [\App\Http\Controllers\SiteController::class, 'index'])->name('frontoffice.home');
+    Route::get('/dashboard', [\App\Http\Controllers\SiteController::class, 'dashboard'])->name('frontoffice.dashboard');
     Route::get('/warning/{message}', [\App\Http\Controllers\WarningHelper::class, 'display_warning_back'])->name('display_warning');
     Route::get('/warning/{message}', [\App\Http\Controllers\WarningHelper::class, 'display_warning'])->name('display_warning');
 

@@ -2,7 +2,7 @@
 <nav id="topnav" class="defaultscroll is-sticky">
     <div class="container">
         <!-- Logo container-->
-        <a class="logo" href="{{ route('home') }}">
+        <a class="logo" href="{{ route('frontoffice.home') }}">
             @if(isset($lightNav) && $lightNav == true)
                 <span class="inline-block dark:hidden">
                     <img src="{{ asset('images/logo-dark.png') }}" class="l-dark" height="24" alt="{{ config('app.name', 'Laravel') }}">
@@ -64,9 +64,9 @@
         <div id="navigation">
             <!-- Navigation Menu-->
             <ul class="navigation-menu justify-end {{ isset($lightNav) && $lightNav == true ? 'nav-light' : '' }}">
-                <li><a href="{{ route('home') }}" class="sub-menu-item {{ request()->routeIs('home') ? "active" : "" }}">{{ __('Home') }}</a></li>
+                <li><a href="{{ route('frontoffice.home') }}" class="sub-menu-item {{ request()->routeIs('home') ? "active" : "" }}">{{ __('Home') }}</a></li>
 
-                <li><a href="{{ route('home') }}#price" class="sub-menu-item ">{{ __('Price') }}</a></li>
+                <li><a href="{{ route('frontoffice.home') }}#price" class="sub-menu-item ">{{ __('Price') }}</a></li>
                 @if(false)
                     <li><a href="{{ route('contacts.create') }}" class="sub-menu-item">{{ __('Contacts') }}</a></li>
                 @endif
