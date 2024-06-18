@@ -36,6 +36,10 @@ export default defineConfig({
                 'resources/js/vendor/toastify.js',
                 'resources/css/vendor/toastify.css',
 
+                "resources/js/vendor/flatpickr.js",
+                "resources/js/components/flatpickr.js",
+                "resources/css/vendor/flatpickr.css",
+
                 //"resources/js/vendor/tiny-slider.js",
             ],
             buildDirectory: '/frontend-assets',

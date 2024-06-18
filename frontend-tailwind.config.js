@@ -44,7 +44,7 @@ module.exports = {
         extend: {
             colors: {
                 // You can also define shades if needed or a primary color
-                /*primary: {
+                primary: {
                     DEFAULT: '#241E4C',
                     hover: '#514A7E',
                 },
@@ -55,7 +55,7 @@ module.exports = {
                 'warning': "#facc15",
                 'white-soft': '#F7F7FC',
                 'gray-primary': '#575563',
-                'gray-secondary': '#637381',*/
+                'gray-secondary': '#637381',
                 'dark': '#3c4858',
                 'black': '#161c2d',
                 'dark-footer': '#192132',

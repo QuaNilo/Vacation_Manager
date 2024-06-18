@@ -5,24 +5,6 @@
     view()->share('pageTitle', __('Homepage'));
 ?>
 <x-landing-layout>
-    <div class="container flex space-x-3 mt-16 justify-evenly">
-        <div class="border-2 border-blue-800 p-3 shadow-sm">
-            <h1>Days to take vacation</h1>
-            <p>3 Days</p>
-        </div>
-        <div class="border-2 border-b-blue-800 p-3 shadow-sm">
-            <h1>Days to take vacation</h1>
-            <p>3 Days</p>
-        </div>
-        <div class="border-2 border-b-blue-800 p-3 shadow-sm">
-            <h1>Days to take vacation</h1>
-            <p>3 Days</p>
-        </div>
-        <div class="border-2 border-b-blue-800 p-3 shadow-sm">
-            <h1>Days to take vacation</h1>
-            <p>3 Days</p>
-        </div>
-    </div>
     <div class="flex justify-center mt-32">
         <div x-data="{ isOpenCreate: false, isOpenEdit: false, event_data: {}}" id='calendarDiv' class="row justify-content-center h-screen w-1/2">
             <div class="col-md-8">
@@ -50,7 +32,7 @@
                     editable: true,
                     displayEventTime: true,
                     displayEventEnd: true,
-                    events: '{{ route('calendar.get-vacations') }}',
+                    events: '{{ route('frontoffice.get-vacations') }}',
 
                     eventClick: function(events, jsEvent, view) {
                         var calendarDiv = document.getElementById('calendarDiv');
