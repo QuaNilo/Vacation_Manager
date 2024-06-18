@@ -61,20 +61,12 @@
 
     <body class="font-nunito text-base text-black dark:text-white dark:bg-slate-900 flex flex-col min-h-screen">
         <div class="">
-            <!-- Loader Start -->
-            <!-- <div id="preloader">
-                <div id="status">
-                    <div class="spinner">
-                        <div class="double-bounce1"></div>
-                        <div class="double-bounce2"></div>
-                    </div>
-                </div>
-            </div> -->
-            <!-- Loader End -->
-            @include('layouts.frontend._navbar_center')
-            {{-- @include('flash::message_tailwind') --}}
+
             <x-frontend.notification-handler />
-            {{ $slot }}
+
+                <div class="grid h-screen grid-cols-12">
+                    {{ $slot }}
+                </div>
         </div>
 
         @include('layouts.frontend._footer')
@@ -83,9 +75,6 @@
         @stack('vendors')
 
         @vite([
-            //'resources/frontend-assets/js/vendor/wow.js',
-            //'resources/frontend-assets/js/vendor/tobii.js',
-            //'resources/frontend-assets/js/easy_background.js',
             'resources/frontend-assets/js/vendor/feather.js',
             'resources/frontend-assets/js/vendor/tiny-slider.js',
             'resources/frontend-assets/js/plugins.init.js',

@@ -55,7 +55,7 @@
             <ul class="navigation-menu">
                 <li><a href="{{ route('frontoffice.home') }}" class="sub-menu-item {{ request()->routeIs('home') ? "active" : "" }}">{{ __('Home') }}</a></li>
 
-                <li><a href="{{ route('frontoffice.dashboard') }}" class="sub-menu-item ">{{ __('Dashboard') }}</a></li>
+                <li><a href="{{ route('frontoffice.home') }}" class="sub-menu-item ">{{ __('Dashboard') }}</a></li>
                 @if(false)
                 <li><a href="{{ route('contacts.create') }}" class="sub-menu-item">{{ __('Contacts') }}</a></li>
                 @endif

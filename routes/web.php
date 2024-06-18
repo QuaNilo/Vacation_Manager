@@ -2,10 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 Route::middleware(['check.company'])->group(function () {
-    Route::get('/', [\App\Http\Controllers\SiteController::class, 'index'])->name('frontoffice.home');
+    Route::get('/', [\App\Http\Controllers\SiteController::class, 'dashboard'])->name('frontoffice.home');
+    Route::get('/calendar', [\App\Http\Controllers\SiteController::class, 'calendar'])->name('frontoffice.calendar');
+    Route::get('/profile', [\App\Http\Controllers\SiteController::class, 'profile'])->name('frontoffice.profile');
     Route::get('/calendar/frontoffice/get-vacations', [\App\Http\Controllers\SiteController::class, 'frontOfficeGetVacations'])->name('frontoffice.get-vacations');
-    Route::get('/dashboard', [\App\Http\Controllers\SiteController::class, 'dashboard'])->name('frontoffice.dashboard');
-    Route::get('/dashboard/profile', [\App\Http\Controllers\SiteController::class, 'profile'])->name('frontoffice.profile');
     Route::get('/warning/{message}', [\App\Http\Controllers\WarningHelper::class, 'display_warning_back'])->name('display_warning');
     Route::get('/warning/{message}', [\App\Http\Controllers\WarningHelper::class, 'display_warning'])->name('display_warning');
 
@@ -15,7 +15,6 @@ Route::middleware(['check.company'])->group(function () {
 
     Route::get('theme-switcher/{activeTheme}', [\App\Http\Controllers\ThemeController::class, 'switch'])->name('theme-switcher');
     Route::get('layout-switcher/{activeLayout}', [\App\Http\Controllers\LayoutController::class, 'switch'])->name('layout-switcher');
-    Route::get('calendar', [\App\Http\Controllers\SiteCalendar::class, 'index'])->name('site.calendar');
     Route::get('profile/password', [\App\Http\Controllers\SiteProfileController::class, 'passwordShow'])->name('site.password-show');
 });
 

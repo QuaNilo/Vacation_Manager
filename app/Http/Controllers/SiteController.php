@@ -16,10 +16,10 @@ class SiteController extends Controller
      *
      * @return View
      */
-    public function index() : View
+    public function calendar() : View
     {
 
-        return view('site.index');
+        return view('site.calendar');
     }
 
     public function dashboard() : View

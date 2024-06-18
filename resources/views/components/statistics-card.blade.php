@@ -1,4 +1,8 @@
-<div class="flex-grow bg-gradient-to-r from-primary to-secondary text-white w-28 h-28 p-2 text-center rounded-xl border-2">
-    <p class="text-3xl bold pb-2">{{ $value }}</p>
-    <p>{{ $title }}</p>
+<div class="flex-grow dark:text-white text-black w-64 h-20 p-2 text-center rounded-xl border-2 shadow-xl">
+    <div class="flex">
+        <div class="flex flex-col">
+            <p class="text-md font-semibold">{{ $title }}</p>
+            <p class="text-md font-bold pb-2">{{ $value }}</p>
+        </div>
+    </div>
 </div>
