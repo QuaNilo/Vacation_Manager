@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Team;
 use App\Models\Vacation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -24,7 +25,11 @@ class SiteController extends Controller
 
     public function dashboard() : View
     {
-        return view('site.dashboard');
+        $team = auth()->user()->team()->first();
+        $user = auth()->user();
+        $team_user_count = Team::find($team->id)->users()->count();
+        $vacations = Vacation::where('user_id', $user->id)->orderBy('start', 'asc')->limit(10)->get();
+        return view('site.dashboard', compact(['team', 'user', 'team_user_count', 'vacations']));
     }
 
     public function profile()
