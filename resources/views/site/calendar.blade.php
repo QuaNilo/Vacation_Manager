@@ -103,8 +103,20 @@
     <div x-data="{ isOpenCreate: false, isOpenEdit: false, event_data: {}}" class="col-span-8 flex-col py-5 m-5 mb-10 rounded-xl border-2 shadow-xl dark:text-white text-black">
         <div class="flex justify-center">
             <div id='calendarDiv' class="row justify-content-center w-3/4">
-                <x-base.button class="bg-blue-600 text-white mb-4" @click="isOpenCreate = true">{{__('Create Vacation')}}</x-base.button>
-                <x-base.button id="showTeamVacations" class="bg-blue-600 text-white mb-4" >{{__('Show Team Vacations')}}</x-base.button>
+                <div class="flex space-x-4 align-middle">
+                    <x-base.button class="bg-blue-600 text-white mb-4" @click="isOpenCreate = true">{{__('Create Vacation')}}</x-base.button>
+                    <x-base.button id="showTeamVacations" class="bg-blue-600 text-white mb-4" >{{__('Show Team Vacations')}}</x-base.button>
+                    <div class="w-40">
+                        <x-base.form-select class="h-fit" id="filterVacations">
+                            <option value="dayGridMonth">Month</option>
+                            <option value="dayGridWeek">Week</option>
+                            <option value="timeGridDay">Day</option>
+                            <option value="listWeek">List Week</option>
+                        </x-base.form-select>
+
+                    </div>
+
+                </div>
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-body">
@@ -153,25 +165,29 @@
                     calendar.removeAllEventSources()
                     calendar.addEventSource('{{ route('frontoffice.calendar.get-vacations') }}')
                 }
-            let isUser = false;
-            showButton = document.getElementById('showTeamVacations');
-            showButton.addEventListener('click', function() {
-                if(isUser){
-                    calendar.removeAllEventSources();
-                    showButton.innerHTML = 'Show Team Vacations'
-                    calendar.addEventSource('{{ route('frontoffice.calendar.get-vacations') }}')
-                    calendar.refetchEvents()
-                    console.log('showing user vacations')
-                }
-                else{
-                    calendar.removeAllEventSources();
-                    showButton.innerHTML = 'Show User Vacations'
-                    calendar.addEventSource('{{ route('frontoffice.calendar.get-team-vacations') }}');
-                    calendar.refetchEvents()
-                    console.log('showing team vacations')
-                }
-                isUser = !isUser;
-            });
+                let isUser = false;
+                showButton = document.getElementById('showTeamVacations');
+                showButton.addEventListener('click', function() {
+                    if(isUser){
+                        calendar.removeAllEventSources();
+                        showButton.innerHTML = 'Show Team Vacations'
+                        calendar.addEventSource('{{ route('frontoffice.calendar.get-vacations') }}')
+                        calendar.refetchEvents()
+                        console.log('showing user vacations')
+                    }
+                    else{
+                        calendar.removeAllEventSources();
+                        showButton.innerHTML = 'Show User Vacations'
+                        calendar.addEventSource('{{ route('frontoffice.calendar.get-team-vacations') }}');
+                        calendar.refetchEvents()
+                        console.log('showing team vacations')
+                    }
+                    isUser = !isUser;
+                });
+                 var filterSelect = document.getElementById('filterVacations');
+                filterSelect.addEventListener('change', function (){
+                    calendar.changeView(filterSelect.value)
+                });
             });
         </script>
     @endpush
