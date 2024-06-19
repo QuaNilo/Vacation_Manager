@@ -103,7 +103,8 @@
     <div x-data="{ isOpenCreate: false, isOpenEdit: false, event_data: {}}" class="col-span-8 flex-col py-5 m-5 mb-10 rounded-xl border-2 shadow-xl dark:text-white text-black">
         <div class="flex justify-center">
             <div id='calendarDiv' class="row justify-content-center w-3/4">
-                <x-base.button  class="bg-blue-600 text-white mb-4" @click="isOpenCreate = true">{{__('Create Vacation')}}</x-base.button>
+                <x-base.button class="bg-blue-600 text-white mb-4" @click="isOpenCreate = true">{{__('Create Vacation')}}</x-base.button>
+                <x-base.button id="showTeamVacations" class="bg-blue-600 text-white mb-4" >{{__('Show Team Vacations')}}</x-base.button>
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-body">
@@ -121,7 +122,7 @@
     @push('firstScripts')
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     @endpush
-    @push('scripts')
+    @push('firstScripts')
         <script type="text/javascript">
             $.noConflict();
             document.addEventListener('DOMContentLoaded', function() {
@@ -143,6 +144,34 @@
                     }
                 });
                 calendar.render();
+                const showTeamVacations = () => {
+                    calendar.removeAllEventSources()
+                    calendar.addEventSource('{{ route('frontoffice.calendar.get-vacations') }}')
+                }
+
+                const showUserVacations = () => {
+                    calendar.removeAllEventSources()
+                    calendar.addEventSource('{{ route('frontoffice.calendar.get-vacations') }}')
+                }
+            let isUser = false;
+            showButton = document.getElementById('showTeamVacations');
+            showButton.addEventListener('click', function() {
+                if(isUser){
+                    calendar.removeAllEventSources();
+                    showButton.innerHTML = 'Show Team Vacations'
+                    calendar.addEventSource('{{ route('frontoffice.calendar.get-vacations') }}')
+                    calendar.refetchEvents()
+                    console.log('showing user vacations')
+                }
+                else{
+                    calendar.removeAllEventSources();
+                    showButton.innerHTML = 'Show User Vacations'
+                    calendar.addEventSource('{{ route('frontoffice.calendar.get-team-vacations') }}');
+                    calendar.refetchEvents()
+                    console.log('showing team vacations')
+                }
+                isUser = !isUser;
+            });
             });
         </script>
     @endpush

@@ -78,6 +78,17 @@ class SiteController extends Controller
         return response()->json($vacations);
     }
 
+    public function frontOfficeGetTeamVacations(Request $request)
+    {
+        $team_id = auth()->user()->team_id;
+        $team_vacations = Vacation::whereHas('user', function ($query) use ($team_id) {
+            $query->where('team_id', $team_id);
+        })
+            ->where('approved', Vacation::STATUS_APPROVED)
+            ->get();
+        return response()->json($team_vacations);
+    }
+
     public function calendarSaveVacations(Request $request)
     {
         $start = Carbon::parse($request->start);

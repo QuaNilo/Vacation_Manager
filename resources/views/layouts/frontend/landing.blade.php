@@ -57,6 +57,7 @@
         <!-- Styles -->
         @livewireStyles
         @stack('styles')
+        @stack('firstScripts')
     </head>
 
     <body class="font-nunito text-base text-black dark:text-white dark:bg-slate-900 flex flex-col min-h-screen">
@@ -72,7 +73,6 @@
 
         @include('layouts.frontend._footer')
 
-        @stack('firstScripts')
         @stack('vendors')
 
         @vite([

@@ -5,6 +5,7 @@ Route::middleware(['check.company'])->group(function () {
     Route::get('/', [\App\Http\Controllers\SiteController::class, 'dashboard'])->name('frontoffice.home');
     Route::get('/calendar', [\App\Http\Controllers\SiteController::class, 'calendar'])->name('frontoffice.calendar');
     Route::get('/calendar/frontoffice/get-vacations', [\App\Http\Controllers\SiteController::class, 'frontOfficeGetVacations'])->name('frontoffice.calendar.get-vacations');
+    Route::get('/calendar/frontoffice/get-team-vacations', [\App\Http\Controllers\SiteController::class, 'frontOfficeGetTeamVacations'])->name('frontoffice.calendar.get-team-vacations');
     Route::post('/calendar/frontoffice/save-vacations', [\App\Http\Controllers\SiteController::class, 'calendarSaveVacations'])->name('frontoffice.calendar.save-vacations');
     Route::get('/warning/{message}', [\App\Http\Controllers\WarningHelper::class, 'display_warning_back'])->name('display_warning');
     Route::get('/warning/{message}', [\App\Http\Controllers\WarningHelper::class, 'display_warning'])->name('display_warning');
