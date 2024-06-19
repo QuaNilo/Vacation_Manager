@@ -1,3 +1,6 @@
+<?php
+    view()->share('pageTitle', __('Dashboard'));
+?>
 <x-landing-layout>
     <x-frontend.dashboard-navbar/>
     <div class="col-span-11 flex-col p-10">

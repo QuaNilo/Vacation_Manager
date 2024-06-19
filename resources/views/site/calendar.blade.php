@@ -1,8 +1,8 @@
 <?php
-    $company = auth()->user()->company()->first();
-    $users = $company->users()->get();
-    $vacation = new \App\Models\Vacation();
-    view()->share('pageTitle', __('Homepage'));
+//    $company = auth()->user()->company()->first();
+//    $users = $company->users()->get();
+//    $vacation = new \App\Models\Vacation();
+    view()->share('pageTitle', __('Calendar'));
 ?>
 
 <x-landing-layout>
@@ -10,6 +10,7 @@
     <div class="col-span-11 flex-col m-10">
         <div class="flex justify-center">
             <div x-data="{ isOpenCreate: false, isOpenEdit: false, event_data: {}}" id='calendarDiv' class="row justify-content-center h-screen w-1/2">
+                <x-base.button  class="bg-primary text-white" @click="isOpenCreate = true">{{__('Create Vacation')}}</x-base.button>
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-body">
@@ -17,7 +18,7 @@
                         </div>
                     </div>
                 </div>
-                <x-backend.calendar-modal-create-popup/>
+                <x-frontend.calendar-modal-create-popup/>
                 <livewire:calendar-edit-pop-up />
 
             </div>
@@ -37,7 +38,7 @@
                 editable: true,
                 displayEventTime: true,
                 displayEventEnd: true,
-                events: '{{ route('frontoffice.get-vacations') }}',
+                events: '{{ route('frontoffice.calendar.get-vacations') }}',
 
                 eventClick: function(events, jsEvent, view) {
                     var calendarDiv = document.getElementById('calendarDiv');
