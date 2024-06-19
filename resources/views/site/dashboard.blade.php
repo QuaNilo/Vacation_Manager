@@ -45,7 +45,7 @@
                 <div class="flex content-evenly h-fit space-x-8">
                     <x-statistics-card title="Vacation Days Available" value="4"/>
                     <x-statistics-card title="Vacation Days taken" value="1"/>
-                    <x-statistics-card title="Vacation Days gained per month" value="2"/>
+                    <x-statistics-card title="Vacation Days gained per month" value="{{$team->members_vacation_days_regen_monthly}}"/>
                 </div>
                 <div class="flex space-x-16">
                     @if($vacations)
