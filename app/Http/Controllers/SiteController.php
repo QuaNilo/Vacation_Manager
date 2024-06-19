@@ -21,8 +21,13 @@ class SiteController extends Controller
      */
     public function calendar() : View
     {
-
-        return view('site.calendar');
+        $user = auth()->user();
+        $vacations_pending = Vacation::where('user_id', $user->id)
+            ->where('approved', Vacation::STATUS_PENDING)
+            ->orderBy('start', 'asc')->paginate(5);
+        $vacations_history = Vacation::where('user_id', $user->id)
+            ->orderBy('start', 'asc')->paginate(5);
+        return view('site.calendar', compact(['user', 'vacations_pending', 'vacations_history']));
     }
 
     public function dashboard() : View

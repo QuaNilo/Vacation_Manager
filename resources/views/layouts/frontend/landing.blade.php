@@ -64,7 +64,8 @@
 
             <x-frontend.notification-handler />
 
-                <div class="grid h-screen grid-cols-12">
+                <div class="grid grid-cols-12">
+                    <x-frontend.dashboard-navbar/>
                     {{ $slot }}
                 </div>
         </div>

@@ -2,14 +2,10 @@
     view()->share('pageTitle', __('Dashboard'));
 ?>
 <x-landing-layout>
-    <x-frontend.dashboard-navbar/>
-    <div class="col-span-11 flex-col p-10">
+    <div class="col-span-11 flex-col py-10">
         <div class="flex justify-evenly">
-            <div class="flex-col space-y-16 w-fit">
+            <div class="flex-col space-y-8 w-fit">
                 <div id="profile-card" class="flex-col p-5 rounded-xl border-2 shadow-xl dark:text-white text-black">
-                    <div id="profile-div" class="">
-                        <img class="border-2 border-b-blue-950 rounded-3xl bg-purple-950"/>
-                    </div>
 
                     <div class="text-center">
                         <h1 class="text-2xl font-bold text-blue-950">{{$user->name}}</h1>
@@ -44,13 +40,13 @@
                     </div>
                 @endif
             </div>
-            <div class="flex-col space-y-16">
+            <div class="flex-col space-y-8">
                 <div class="flex content-evenly h-fit space-x-8">
                     <x-statistics-card title="Vacation Days Available" value="4"/>
                     <x-statistics-card title="Vacation Days taken" value="1"/>
                     <x-statistics-card title="Vacation Days gained per month" value="{{$team->members_vacation_days_regen_monthly}}"/>
                 </div>
-                <div class="flex space-x-16">
+                <div class="flex space-x-8">
                     @if($vacations)
                         <div class="p-5 rounded-xl border-2 shadow-xl dark:text-white text-black">
                             <h2 class="text-lg font-bold mb-4">{{__('Vacations')}}</h2>
