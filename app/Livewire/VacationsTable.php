@@ -36,6 +36,11 @@ class VacationsTable extends Component implements HasForms, HasTable
                 ->sortable()
                 ->toggleable()
                 ->searchable(),
+            TextColumn::make("user.team.name")
+                ->label(__('Team Name'))
+                ->sortable()
+                ->toggleable()
+                ->searchable(),
             TextColumn::make("approved")
                 ->label($newModel->getAttributeLabel("approved"))
                 ->formatStateUsing(fn (Vacation $record): string => $record->approvedLabel)

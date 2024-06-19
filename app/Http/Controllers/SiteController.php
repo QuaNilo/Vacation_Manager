@@ -27,9 +27,13 @@ class SiteController extends Controller
     {
         $team = auth()->user()->team()->first();
         $user = auth()->user();
-        $team_user_count = Team::find($team->id)->users()->count();
-        $vacations = Vacation::where('user_id', $user->id)->orderBy('start', 'asc')->limit(10)->get();
-        return view('site.dashboard', compact(['team', 'user', 'team_user_count', 'vacations']));
+        $vacations = Vacation::where('user_id', $user->id)->orderBy('start', 'asc')->paginate(5);
+        if($team){
+            $team_users = $team->users()->paginate(5);
+            $team_user_count = Team::find($team->id)->users()->count();
+
+        }
+        return view('site.dashboard', compact(['team', 'user', 'team_user_count', 'vacations', 'team_users']));
     }
 
     public function profile()

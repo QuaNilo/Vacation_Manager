@@ -40,6 +40,9 @@
             @include('teams.show_fields')
         </dl>
     </div>
+
+    <div>
+    </div>
     <x-base.dialog id="delete-modal" x-data>
         <x-base.dialog.panel>
             <div class="p-5 text-center">

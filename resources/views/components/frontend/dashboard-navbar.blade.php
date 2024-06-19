@@ -1,4 +1,4 @@
-<div class="col-span-1 flex flex-col items-center border-r-2 border-r-blue-700 h-screen justify-between">
+<div class="col-span-1 flex flex-col items-center border-r-4 h-screen justify-between">
     <div class="mt-4">
         <a class="logo" href="{{ route('frontoffice.home') }}">
             <img src="{{ asset('images/logo-dark.png') }}" class="inline-block dark:hidden h-9" alt="{{ config('app.name', 'Laravel') }}">
