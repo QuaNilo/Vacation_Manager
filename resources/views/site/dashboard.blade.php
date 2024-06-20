@@ -2,7 +2,7 @@
     view()->share('pageTitle', __('Dashboard'));
 ?>
 <x-landing-layout>
-    <div class="col-span-11 flex-col py-10">
+    <div class="col-span-11 flex-col py-3">
         <div class="flex justify-evenly">
             <div class="flex-col space-y-8 w-fit">
                 <div id="profile-card" class="flex-col p-5 rounded-xl border-2 shadow-xl dark:text-white text-black">
@@ -19,33 +19,65 @@
                 </div>
                 @if($team)
                     <div class="flex flex-col p-5 rounded-xl border-2 shadow-xl dark:text-white text-black">
-                        <h1 class="font-bold text-2xl text-center mb-6">{{__('Team')}}</h1>
-                        <div class="flex justify-between px-2">
-                            <span class="font-bold text-slate-500 text-md">{{__('Name')}}</span>
-                            <span class="text-lg font-semibold">{{$team->name}}</span>
-                        </div>
-
-                        <div class="flex justify-between px-2">
-                            <span class="font-bold text-slate-500 text-md">{{__('Category')}}</span>
-                            <span class="text-lg font-semibold">{{$team->category}}</span>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col p-5 rounded-xl border-2 shadow-xl dark:text-white text-black">
-                        <h1 class="font-bold text-2xl text-center mb-6">{{__('Team Information')}}</h1>
-                        <div class="flex justify-between px-2">
-                            <span class="font-bold text-slate-500 text-md">{{__('Member count')}}</span>
-                            <span class="text-lg font-semibold">{{$team_user_count}}</span>
-                        </div>
-                        <div class="flex flex-col justify-around">
-                            <span class="font-semibold text-black text-xl text-center my-2">{{__('Members on Vacation')}}</span>
+                        <div id="team_div" class="pb-4 border-b-2">
+                            <h1 class="font-bold text-2xl text-center mb-6">{{__('Team')}}</h1>
                             <div class="flex justify-between px-2">
-                                <span class="font-bold text-slate-500 text-md">{{__('Next Week')}}</span>
-                                <span class="text-lg font-semibold">{{$vacation_next_week_team}}</span>
+                                <span class="font-bold text-slate-500 text-md">{{__('Name')}}</span>
+                                <span class="text-lg font-semibold">{{$team->name}}</span>
                             </div>
+
                             <div class="flex justify-between px-2">
-                                    <span class="font-bold text-slate-500 text-md">{{__('Next Month')}}</span>
-                                    <span class="text-lg font-semibold">{{$vacation_next_month_team}}</span>
+                                <span class="font-bold text-slate-500 text-md">{{__('Category')}}</span>
+                                <span class="text-lg font-semibold">{{$team->category}}</span>
+                            </div>
+
+                        </div>
+                        <div id="team_information_div" class="pb-4 border-b-2">
+                            <h1 class="font-bold text-2xl text-center my-6">{{__('Team Information')}}</h1>
+                            <div class="flex justify-between px-2">
+                                <span class="font-bold text-slate-500 text-md">{{__('Member count')}}</span>
+                                <span class="text-lg font-semibold">{{$team_user_count}}</span>
+                            </div>
+                            <div class="flex flex-col justify-around">
+                                <span class="font-semibold text-black text-xl text-center my-2">{{__('Members on Vacation')}}</span>
+                                <div class="flex justify-between px-2">
+                                    <span class="font-bold text-slate-500 text-md">{{__('Next Week')}}</span>
+                                    <span class="text-lg font-semibold">{{$vacation_next_week_team}}</span>
+                                </div>
+                                <div class="flex justify-between px-2">
+                                        <span class="font-bold text-slate-500 text-md">{{__('Next Month')}}</span>
+                                        <span class="text-lg font-semibold">{{$vacation_next_month_team}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <h2 class="text-lg font-bold text-center my-4">{{__('Team Users')}}</h2>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50 dark:bg-gray-700">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">
+                                            {{__('Name')}}
+                                        </th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">
+                                            {{__('Team')}}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+                                @foreach($team_users as $user)
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-200">
+                                            {{$user->name}}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-200">
+                                            {{$user->team->name}}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                            <div class="mt-4">
+                                {{ $team_users->links() }}
                             </div>
                         </div>
                     </div>
@@ -76,41 +108,40 @@
                     </x-statistics-card>
                 </div>
                 <div class="flex space-x-8">
-                    @if($team_users)
-                        <div class="p-5 rounded-xl border-2 shadow-xl dark:text-white text-black">
-                            <h2 class="text-lg font-bold mb-4">{{__('Team Users')}}</h2>
-                                <div class="overflow-x-auto">
-                                    <table class="min-w-full divide-y divide-gray-200">
-                                        <thead class="bg-gray-50 dark:bg-gray-700">
-                                            <tr>
-                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">
-                                                    {{__('Name')}}
-                                                </th>
-                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">
-                                                    {{__('Team')}}
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                                        @foreach($team_users as $user)
-                                            <tr>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-200">
-                                                    {{$user->name}}
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-200">
-                                                    {{$user->team->name}}
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                    <div class="mt-4">
-                                        {{ $team_users->links() }}
+                    @if($company)
+                        <div class="flex flex-col p-5 rounded-xl border-2 shadow-xl dark:text-white text-black">
+                            <div id="team_div" class="pb-4 border-b-2">
+                                <h1 class="font-bold text-2xl text-center mb-6">{{__('Company')}}</h1>
+                                <div class="flex justify-between px-2">
+                                    <span class="font-bold text-slate-500 text-md">{{__('Name')}}</span>
+                                    <span class="text-lg font-semibold">{{$company->name}}</span>
+                                </div>
+
+                                <div class="flex justify-between px-2">
+                                    <span class="font-bold text-slate-500 text-md">{{__('Category')}}</span>
+                                    <span class="text-lg font-semibold">{{$company->category}}</span>
+                                </div>
+
+                            </div>
+                            <div id="team_information_div" class="">
+                                <h1 class="font-bold text-2xl text-center my-6">{{__('Company Information')}}</h1>
+                                <div class="flex justify-between px-2">
+                                    <span class="font-bold text-slate-500 text-md">{{__('Member count')}}</span>
+                                    <span class="text-lg font-semibold">{{$company_user_count}}</span>
+                                </div>
+                                <div class="flex flex-col justify-around">
+                                    <span class="font-semibold text-black text-xl text-center my-2">{{__('Members on Vacation')}}</span>
+                                    <div class="flex justify-between px-2">
+                                        <span class="font-bold text-slate-500 text-md">{{__('Next Week')}}</span>
+                                        <span class="text-lg font-semibold">{{$vacation_next_week_company}}</span>
+                                    </div>
+                                    <div class="flex justify-between px-2">
+                                            <span class="font-bold text-slate-500 text-md">{{__('Next Month')}}</span>
+                                            <span class="text-lg font-semibold">{{$vacation_next_month_company}}</span>
                                     </div>
                                 </div>
-                        </div>
-
-                    @endif
+                            </div>
+                   @endif
                 </div>
             </div>
         </div>

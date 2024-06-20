@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Models\Team;
 use App\Models\User;
 use App\Models\Vacation;
@@ -34,23 +35,30 @@ class SiteController extends Controller
     {
         $team = auth()->user()->team()->first();
         $user = auth()->user();
+        $company = $user->company;
         $vacations = Vacation::where('user_id', $user->id)->orderBy('start', 'asc')->paginate(5);
         $vacation_days_taken_total = Vacation::where('user_id', $user->id)
             ->where('approved', Vacation::STATUS_APPROVED)
             ->sum('vacation_days');
-        $data = $this->getUsersVacationWeek($user);
-        $vacation_next_month_team = $data['month'];
-        $vacation_next_week_team = $data['week'];
+        if($company){
+            $company_user_count = Company::find($company->id)->users()->count();
+            $data = $this->getUsersVacationCompany($user, $company);
+            $vacation_next_month_company = $data['month'];
+            $vacation_next_week_company = $data['week'];
+        }
         if($team){
             $team_users = $team->users()->paginate(5, ['*'], 'team_users_page');
             $team_user_count = Team::find($team->id)->users()->count();
+            $data = $this->getUsersVacationTeam($user);
+            $vacation_next_month_team = $data['month'];
+            $vacation_next_week_team = $data['week'];
 
         }
-        return view('site.dashboard', compact(['team', 'user', 'team_user_count', 'vacations', 'team_users', 'vacation_days_taken_total', 'vacation_next_week_team', 'vacation_next_month_team']));
+        return view('site.dashboard', compact(['team', 'user', 'team_user_count', 'vacations', 'team_users', 'vacation_days_taken_total', 'vacation_next_week_team', 'vacation_next_month_team', 'company', 'company_user_count', 'vacation_next_month_company', 'vacation_next_week_company']));
     }
 
 
-    private function getUsersVacationWeek($user){
+    private function getUsersVacationTeam($user){
         $nextWeekStart = Carbon::now()->addWeek()->startOfWeek();
         $nextWeekEnd = Carbon::now()->addWeek()->endOfWeek();
         $nextMonthStart = Carbon::now()->addMonth()->startOfMonth();
@@ -64,6 +72,27 @@ class SiteController extends Controller
 
         $vacation_next_month_team = Vacation::whereHas('user', function ($query) use ($team_id) {
         $query->where('team_id', $team_id);
+        })->whereBetween('start', [$nextMonthStart, $nextMonthEnd])
+          ->orWhereBetween('end', [$nextMonthStart, $nextMonthEnd])
+          ->count();
+
+        return ['week' => $vacation_next_week_team, 'month' => $vacation_next_month_team];
+    }
+
+    private function getUsersVacationCompany($user, $company){
+        $nextWeekStart = Carbon::now()->addWeek()->startOfWeek();
+        $nextWeekEnd = Carbon::now()->addWeek()->endOfWeek();
+        $nextMonthStart = Carbon::now()->addMonth()->startOfMonth();
+        $nextMonthEnd = Carbon::now()->addMonth()->endOfMonth();
+        $company_id = $company->id;
+        $vacation_next_week_team = Vacation::whereHas('user', function ($query) use ($company_id) {
+        $query->where('company_id', $company_id);
+        })->whereBetween('start', [$nextWeekStart, $nextWeekEnd])
+          ->orWhereBetween('end', [$nextWeekStart, $nextWeekEnd])
+          ->count();
+
+        $vacation_next_month_team = Vacation::whereHas('user', function ($query) use ($company_id) {
+        $query->where('company_id', $company_id);
         })->whereBetween('start', [$nextMonthStart, $nextMonthEnd])
           ->orWhereBetween('end', [$nextMonthStart, $nextMonthEnd])
           ->count();
