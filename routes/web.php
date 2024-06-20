@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-Route::middleware(['check.company'])->group(function () {
+Route::middleware(['check.company',
+                'auth:sanctum',
+                config('jetstream.auth_session'),
+                'verified',])->group(function () {
     Route::get('/', [\App\Http\Controllers\SiteController::class, 'dashboard'])->name('frontoffice.home');
     Route::get('/calendar', [\App\Http\Controllers\SiteController::class, 'calendar'])->name('frontoffice.calendar');
     Route::get('/calendar/frontoffice/get-vacations', [\App\Http\Controllers\SiteController::class, 'frontOfficeGetVacations'])->name('frontoffice.calendar.get-vacations');

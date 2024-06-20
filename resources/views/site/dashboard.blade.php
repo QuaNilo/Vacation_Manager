@@ -12,9 +12,13 @@
                         <h2 class="text-xl">{{$user->email}}</h2>
                     </div>
 
-                    <div class="flex mt-6 space-x-3">
-                        <x-base.button>Edit Profile</x-base.button>
-                        <x-base.button>Change Password</x-base.button>
+                    <div x-data="{ isOpenChangePassword: false}" class="flex mt-6 space-x-3">
+                        <form method="POST" action="{{ route('logout') }}" x-data>
+                            @csrf
+                            <x-base.button type="submit">Logout</x-base.button>
+                        </form>
+                        <x-base.button @click="isOpenChangePassword = true">Change Password</x-base.button>
+                        <x-frontend.change-password/>
                     </div>
                 </div>
                 @if($team)
