@@ -35,7 +35,7 @@ class UsersTable extends Component implements HasForms, HasTable
         $authenticatedUserCompany = auth()->user()->company()->first();
         if ($authenticatedUserCompany) {
             // Build the query to fetch users with the same company
-            $query = User::query()->with('roles', 'company')
+            $query = User::query()->with('roles', 'company', 'team')
                 ->whereHas('company', function ($query) use ($authenticatedUserCompany) {
                     $query->where('companies.id', $authenticatedUserCompany->id)
                         ->whereNotIn('company_join_request', [User::STATUS_JOIN_REQUEST_PENDING]);
@@ -66,6 +66,11 @@ class UsersTable extends Component implements HasForms, HasTable
                     ->sortable()
                     ->toggleable()
                     ->searchable(),*/
+                TextColumn::make("team.name")
+                    ->label(__('Team'))
+                    ->sortable()
+                    ->toggleable()
+                    ->searchable(),
                 TextColumn::make('created_at')
                     ->label($newModel->getAttributeLabel('created_at'))
                     ->dateTime()

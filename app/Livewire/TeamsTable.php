@@ -28,7 +28,7 @@ class TeamsTable extends Component implements HasForms, HasTable
     {
         $newModel = new Team();
         return $table
-            ->query(Team::query())
+            ->query(Team::withCount('users'))
             ->columns([
                 TextColumn::make("name")
                 ->label($newModel->getAttributeLabel("name"))
@@ -37,6 +37,11 @@ class TeamsTable extends Component implements HasForms, HasTable
                 ->searchable(),
             TextColumn::make("category")
                 ->label($newModel->getAttributeLabel("category"))
+                ->sortable()
+                ->toggleable()
+                ->searchable(),
+            TextColumn::make("users_count")
+                ->label(__('Members'))
                 ->sortable()
                 ->toggleable()
                 ->searchable(),
