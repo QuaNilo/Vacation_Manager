@@ -33,6 +33,14 @@ class SiteController extends Controller
 
     public function dashboard() : View
     {
+        $company_user_count = null;
+        $vacation_next_month_company = null;
+        $vacation_next_week_company = null;
+        $team_users = null;
+        $team_user_count = null;
+        $vacation_next_month_team = null;
+        $vacation_next_week_team = null;
+
         $team = auth()->user()->team()->first();
         $user = auth()->user();
         $company = $user->company;

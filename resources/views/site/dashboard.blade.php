@@ -38,52 +38,60 @@
                         </div>
                         <div id="team_information_div" class="pb-4 border-b-2">
                             <h1 class="font-bold text-2xl text-center my-6">{{__('Team Information')}}</h1>
-                            <div class="flex justify-between px-2">
-                                <span class="font-bold text-slate-500 text-md">{{__('Member count')}}</span>
-                                <span class="text-lg font-semibold">{{$team_user_count}}</span>
-                            </div>
+                            @if(isset($team_user_count))
+                                <div class="flex justify-between px-2">
+                                    <span class="font-bold text-slate-500 text-md">{{__('Member count')}}</span>
+                                    <span class="text-lg font-semibold">{{$team_user_count}}</span>
+                                </div>
+                            @endif
                             <div class="flex flex-col justify-around">
                                 <span class="font-semibold text-black text-xl text-center my-2">{{__('Members on Vacation')}}</span>
                                 <div class="flex justify-between px-2">
-                                    <span class="font-bold text-slate-500 text-md">{{__('Next Week')}}</span>
-                                    <span class="text-lg font-semibold">{{$vacation_next_week_team}}</span>
+                                    @if(isset($vacation_next_week_team))
+                                        <span class="font-bold text-slate-500 text-md">{{__('Next Week')}}</span>
+                                        <span class="text-lg font-semibold">{{$vacation_next_week_team}}</span>
+                                    @endif
                                 </div>
                                 <div class="flex justify-between px-2">
+                                    @if(isset($vacation_next_month_team))
                                         <span class="font-bold text-slate-500 text-md">{{__('Next Month')}}</span>
                                         <span class="text-lg font-semibold">{{$vacation_next_month_team}}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
-                        <h2 class="text-lg font-bold text-center my-4">{{__('Team Users')}}</h2>
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50 dark:bg-gray-700">
-                                    <tr>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">
-                                            {{__('Name')}}
-                                        </th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">
-                                            {{__('Team')}}
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                                @foreach($team_users as $user)
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-200">
-                                            {{$user->name}}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-200">
-                                            {{$user->team->name}}
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                            <div class="mt-4">
-                                {{ $team_users->links() }}
+                        @if(isset($team_users))
+                            <h2 class="text-lg font-bold text-center my-4">{{__('Team Users')}}</h2>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead class="bg-gray-50 dark:bg-gray-700">
+                                        <tr>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">
+                                                {{__('Name')}}
+                                            </th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">
+                                                {{__('Team')}}
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+                                    @foreach($team_users as $user)
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-200">
+                                                {{$user->name}}
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-200">
+                                                {{$user->team->name}}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                                <div class="mt-4">
+                                    {{ $team_users->links() }}
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
                 @endif
             </div>
@@ -102,14 +110,16 @@
                         <path d="M22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C21.5093 4.43821 21.8356 5.80655 21.9449 8" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
                         </svg>
                     </x-statistics-card>
-                    <x-statistics-card title="Vacation Days gained per month" value="{{$team->members_vacation_days_regen_monthly}}">
-                        <svg width="84" height="84" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3.46436 20.5354L20.5354 3.46436" stroke="#1C274D" stroke-width="1.5"/>
-                        <path d="M18 17H13" stroke="#1C274D" stroke-width="1.5" stroke-linecap="round"/>
-                        <path d="M10.5 8.00002H8M8 8.00002L5.5 8.00002M8 8.00002L8 5.5M8 8.00002L8 10.5" stroke="#1C274D" stroke-width="1.5" stroke-linecap="round"/>
-                        <path d="M22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C21.5093 4.43821 21.8356 5.80655 21.9449 8" stroke="#1C274D" stroke-width="1.5" stroke-linecap="round"/>
-                        </svg>
-                    </x-statistics-card>
+                    @if($team)
+                        <x-statistics-card title="Vacation Days gained per month" value="{{$team->members_vacation_days_regen_monthly}}">
+                            <svg width="84" height="84" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3.46436 20.5354L20.5354 3.46436" stroke="#1C274D" stroke-width="1.5"/>
+                            <path d="M18 17H13" stroke="#1C274D" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M10.5 8.00002H8M8 8.00002L5.5 8.00002M8 8.00002L8 5.5M8 8.00002L8 10.5" stroke="#1C274D" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C21.5093 4.43821 21.8356 5.80655 21.9449 8" stroke="#1C274D" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </x-statistics-card>
+                    @endif
                 </div>
                 <div class="flex space-x-8">
                     @if($company)

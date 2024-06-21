@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
 use App\Models\Company;
+use App\Models\Permission;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -34,6 +37,7 @@ public function requestJoin(Request $request)
                 'company_id' => $company->id,
                 'company_join_request' => '2',
             ]);
+            $user->assignRole(Role::ROLE_USER);
 
             if ($updateSuccessful) {
                 flash('Request submitted')->overlay()->success()->duration(4000);
@@ -92,13 +96,17 @@ public function store(CreateCompanyRequest $request)
 {
     try {
         $input = $request->all();
-
+        $user = auth()->user();
         // Attempt to create the company
         $company = Company::create($input);
 
         // Associate the company with the authenticated user
-        auth()->user()->company()->associate($company);
-        auth()->user()->save();
+        $user->company()->associate($company);
+        $user->company_join_request = User::STATUS_JOIN_REQUEST_ACCEPTED;
+        $user->removeRole(Role::ROLE_USER);
+        $user->assignRole(Role::ROLE_MANAGER);
+        $user->syncPermissions(Permission::PERMISSION_ADMIN_APP);
+        $user->save();
 
         flash(__('Saved successfully.'))->overlay()->success();
     } catch (QueryException $exception) {

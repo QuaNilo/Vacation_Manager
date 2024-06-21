@@ -17,7 +17,7 @@
         @if(isset($team->name))
             <x-backend.dashboard.statistics-card :number="'10'" :title="$team->name" :card="'team'" :iconName="'bar-chart-4'"/>
         @endif
-        <x-backend.dashboard.statistics-card :number="$vacation_days_taken_year" :card="'daysTaken'" :title="__('Dias/Ano Atual')" :iconName="'bar-chart-4'"/>
+        <x-backend.dashboard.statistics-card :number="$vacation_days_taken_year" :card="'daysTaken'" :title="__('Dias Ferias/Ano Atual')" :iconName="'bar-chart-4'"/>
         <x-backend.dashboard.statistics-card :number="$vacation_days_available" :card="'daysAvailable'" :title="__('Dias Disponiveis')" :iconName="'mail-check'"/>
         <x-backend.dashboard.statistics-card :number="$vacation_requests_pending" :card="'vacationsPending'" :title="__('Ferias Pendentes')" :iconName="'User'"/>
     </div>

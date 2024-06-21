@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Auth;
 use Closure;
 use Illuminate\Http\Request;
@@ -16,14 +17,14 @@ class CheckCompany
      */
     public function handle(Request $request, Closure $next): Response
     {
-
-        // Get the currently authenticated user
+//        dd(Auth::user()->getRoleNames());
         $user = Auth::user();
-        // Check if the user has a company relationship
-        if ($user && !$user->company()->first()) {
-            // Redirect to the company creation route
-            flash('You need to associate with a company')->overlay()->warning()->duration(4000);
-            return redirect()->route('dashboard.apply-register-company');
+        if ($user) {
+            if($user->company_join_request !== User::STATUS_JOIN_REQUEST_ACCEPTED || !$user->company()->first() ){
+                flash('You need to associate with a company')->overlay()->warning()->duration(4000);
+                return redirect()->route('dashboard.apply-register-company');
+
+            }
         }
         return $next($request);
     }

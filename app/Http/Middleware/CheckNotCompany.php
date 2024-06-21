@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Auth;
 use Closure;
 use Illuminate\Http\Request;
@@ -16,14 +17,15 @@ class CheckNotCompany
      */
     public function handle(Request $request, Closure $next): Response
     {
-
         // Get the currently authenticated user
         $user = Auth::user();
-        // Check if the user has a company relationship
-        if ($user && $user->company()->first()) {
-            // Redirect to the company creation route
-                flash('You already associated with a company')->overlay()->warning()->duration(4000);
-            return redirect()->route('dashboard');
+        if ($user) {
+            $company = $user->company()->first();
+            if($company && $user->company_join_request == User::STATUS_JOIN_REQUEST_ACCEPTED){
+                // Redirect to the company creation route
+                    flash('You already associated with a company')->overlay()->warning()->duration(4000);
+                return redirect()->route('dashboard');
+            }
         }
         return $next($request);
     }

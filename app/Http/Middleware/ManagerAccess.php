@@ -17,15 +17,12 @@ class ManagerAccess
      */
     public function handle(Request $request, Closure $next)
     {
-        // Check if the user is authenticated
         if (Auth::check()) {
             // Check if the user has either ROLE_SUPER_ADMIN or ROLE_ADMIN
             if (Auth::user()->hasRole([Role::ROLE_SUPER_ADMIN, Role::ROLE_ADMIN, Role::ROLE_MANAGER])) {
                 return $next($request);
             }
         }
-
-        // Redirect or return response for unauthorized access
         return redirect()->route('frontoffice.home');
     }
 }
