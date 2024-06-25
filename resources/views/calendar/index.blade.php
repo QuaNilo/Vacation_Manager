@@ -9,7 +9,6 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="flex justify-end pb-5 pt-2">
-                    <x-base.button  class="bg-primary text-white" @click="isOpenCreate = true">Create Vacation</x-base.button>
                     <x-base.button  class="bg-primary text-white" ><a href="{{route('vacations.index')}}">Show List</a></x-base.button>
                 </div>
                 <div class="card-body">
@@ -41,8 +40,13 @@
                     var x_data = Alpine.$data(calendarDiv);
                     var eventId = events.event.id;
                     Livewire.dispatch('vacationUpdated', {id: eventId});
-
                     x_data.isOpenEdit = true;
+                },
+
+                dateClick: function(info) {
+                    var x_data = Alpine.$data(calendarDiv);
+                    Livewire.dispatch('vacationCreate', {date: info.dateStr});
+                    x_data.isOpenCreate = true;
                 }
             });
             calendar.render();

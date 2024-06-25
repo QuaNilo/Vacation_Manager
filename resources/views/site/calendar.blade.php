@@ -104,7 +104,6 @@
         <div class="flex justify-center">
             <div id='calendarDiv' class="row justify-content-center w-3/4">
                 <div class="flex space-x-4 align-middle">
-                    <x-base.button class="bg-blue-600 text-white mb-4" @click="isOpenCreate = true">{{__('Create Vacation')}}</x-base.button>
                     <x-base.button id="showTeamVacations" class="bg-blue-600 text-white mb-4" >{{__('Show Team Vacations')}}</x-base.button>
                     <div class="w-40">
                         <x-base.form-select class="h-fit" id="filterVacations">
@@ -158,7 +157,6 @@
                     dateClick: function(info) {
                         var x_data = Alpine.$data(calendarDiv);
                         Livewire.dispatch('vacationCreate', {date: info.dateStr});
-                        console.log(info.dateStr)
                         x_data.isOpenCreate = true;
                     }
                 });

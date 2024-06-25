@@ -8,7 +8,6 @@ use Livewire\Component;
 
 class CalendarCreatePopUp extends Component
 {
-    public $vacation;
     public $selectedVacationStartDate;
     protected $listeners = ['vacationCreate'];
 
@@ -19,11 +18,10 @@ class CalendarCreatePopUp extends Component
         public function vacationCreate($date = null)
     {
         if($date !== null){
-            dd($date);
+            $this->selectedVacationStartDate = Carbon::parse($date)->format('Y-m-d');
         }
-        $this->vacation = new Vacation();
-        if ($date !== null) {
-            $this->vacation->start = Carbon::parse($date)->format('Y-m-d');
+        else{
+            $this->selectedVacationStartDate = '';
         }
     }
 
