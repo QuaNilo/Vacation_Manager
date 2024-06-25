@@ -1,4 +1,5 @@
 <?php
+    use Carbon\Carbon;
     $company = auth()->user()->company()->first();
     $user = auth()->user()
 ?>
@@ -51,7 +52,7 @@
             class="{{ ($errors->has('start') ? 'border-danger' : '') }} [&[readonly]]:bg-white"
             id="start"
             name="start"
-            :value="old('start', $vacation->start ?? '')"
+            :value="old('start', Carbon::parse($vacation->start)->format('Y-m-d') ?? '')"
             data-input
         />
         <x-base.input-group.text class="cursor-pointer" title="{{ __('Clear') }}" data-clear>
@@ -82,7 +83,7 @@
             class="{{ ($errors->has('end') ? 'border-danger' : '') }} [&[readonly]]:bg-white"
             id="end"
             name="end"
-            :value="old('end', $vacation->end ?? '')"
+            :value="old('end', Carbon::parse($vacation->end)->format('Y-m-d') ?? '')"
             data-input
         />
         <x-base.input-group.text class="cursor-pointer" title="{{ __('Clear') }}" data-clear>

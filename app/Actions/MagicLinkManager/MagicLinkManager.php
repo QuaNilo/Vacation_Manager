@@ -8,7 +8,7 @@ class MagicLinkManager
     public static function generateMagicLink($user)
     {
         $action = new LoginAction($user);
-        $action->response(redirect(route('site.password-show')));
+        $action->response(redirect(route('companies.join')));
 
         $url = MagicLink::create($action)->url;
         return $url;

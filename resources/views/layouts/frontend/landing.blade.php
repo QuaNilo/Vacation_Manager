@@ -84,6 +84,7 @@
 
         @livewireScripts
         @stack('scripts')
+        <script src='fullcalendar/dist/index.global.js'></script>
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     </body>

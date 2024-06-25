@@ -78,6 +78,7 @@ class UserController extends Controller
         /** @var User $user */
         $user = User::create($input);
         $user->company()->associate(Company::where('id', auth()->user()->company()->first()->id)->first());
+        $user->company_join_request = User::STATUS_JOIN_REQUEST_ACCEPTED;
         $user->save();
         if($user){
             if(auth()->user()->can(Permission::PERMISSION_ADMIN_APP) && url()->previous() != route('profile.show')) {

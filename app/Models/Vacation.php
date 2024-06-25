@@ -52,13 +52,13 @@ class Vacation extends Model implements Auditable
         parent::boot();
 
         static::creating(function ($vacation) {
-            // Calculate the difference in days between start and end
             $start = Carbon::parse($vacation->start);
             $end = Carbon::parse($vacation->end);
             $durationInDays = abs($end->diffInDays($start));
-            // Set the duration_in_days attribute in the model
             $vacation->vacation_days = $durationInDays;
-            $vacation->title = __("Ferias do") . ' ' . $vacation->user->name;
+            if ($vacation->user) {
+                $vacation->title = __("Ferias do") . ' ' . $vacation->user->name;
+            }
         });
     }
 

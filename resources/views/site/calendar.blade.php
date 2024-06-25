@@ -124,8 +124,8 @@
                         </div>
                     </div>
                 </div>
-                <x-frontend.calendar-modal-create-popup/>
-                <livewire:calendar-edit-pop-up />
+                <livewire:calendar-edit-pop-up/>
+                <livewire:calendar-create-pop-up />
 
             </div>
         </div>
@@ -153,6 +153,13 @@
                         Livewire.dispatch('vacationUpdated', {id: eventId});
 
                         x_data.isOpenEdit = true;
+                    },
+
+                    dateClick: function(info) {
+                        var x_data = Alpine.$data(calendarDiv);
+                        Livewire.dispatch('vacationCreate', {date: info.dateStr});
+                        console.log(info.dateStr)
+                        x_data.isOpenCreate = true;
                     }
                 });
                 calendar.render();
